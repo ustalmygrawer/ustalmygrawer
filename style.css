@@ -768,23 +768,116 @@ button {
     }
 
     /* ==========================================================================
-       6. NAPRAWA ZDJĘĆ I SLIDERA - Widok całego produktu bez ucinania
+       6. BEZPIECZNY SLIDER MOBILNY - Powrót do dobrego widoku sprzed zmian
        ========================================================================== */
-    #productSlider img, 
-    .main-photo, 
-    .side-photo-item img {
+    #productSlider {
+        display: flex !important;       
+        flex-direction: row !important; 
+        flex-wrap: nowrap !important;   
+        gap: 0 !important;              
         width: 100% !important;
-        height: auto !important;        /* Wysokość dopasuje się naturalnie do proporcji zdjęcia */
-        max-height: 70vh !important;    /* Zdjęcie nie zajmie więcej niż 70% wysokości ekranu */
-        object-fit: contain !important; /* Zdjęcie dopasuje się w całości do ramki, nic nie zostanie ucięte */
+        height: auto !important;
+        overflow-x: auto !important;    
+        scroll-snap-type: x mandatory !important; 
+        -webkit-overflow-scrolling: touch !important; 
+    }
+
+    /* Ukrywamy suwak na dole */
+    #productSlider::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* Traktujemy każdy element bezpośredni w sliderze jako osobny, szeroki slajd */
+    #productSlider > div,
+    #productSlider > img,
+    #productSlider > picture {
+        flex: 0 0 100% !important;      
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;     /* To zmusza KAŻDY slajd do bycia szerokim */
+        scroll-snap-align: start !important; 
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;      
+    }
+
+    /* NAPRAWA DLA SAFARI: Wymuszamy, aby każdy obrazek w środku 
+       (nawet ten z klasą .side-photo-item z bordowej falbanki) 
+       rozciągał się na 100% swojego kontenera i nie był zgnieciony */
+    #productSlider img {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;     /* Blokuje zwężanie w bordowej falbance */
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important; /* Przywracamy idealny, równy kształt */
+        object-fit: contain !important; 
         display: block !important;
         margin: 0 auto !important;
     }
+}
+/* ==========================================================================
+   ROZSZERZONY BLOK MOBILNY I TABLETOWY (Do 1024px - obejmuje iPady i elastyczny widok)
+   ========================================================================== */
+@media (max-width: 1024px) {
 
-    /* Jeśli kontener slidera miał na sztywno ustawioną wysokość, 
-       również ustawiamy go na auto, by dopasował się do zdjęcia */
+    /* Reset nadrzędnej siatki galerii z widoku PC */
+    .product-gallery-grid, 
     #productSlider {
+        display: flex !important;       
+        flex-direction: row !important; 
+        flex-wrap: nowrap !important;   
+        gap: 0 !important;              
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
         height: auto !important;
+        overflow-x: auto !important;    
+        scroll-snap-type: x mandatory !important; 
+        -webkit-overflow-scrolling: touch !important; 
+        box-sizing: border-box !important;
+    }
+
+    /* Ukrywamy domyślny suwak systemowy */
+    .product-gallery-grid::-webkit-scrollbar,
+    #productSlider::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* KONTENERY SLAJDÓW: Każdy element (div, main-photo, side-photo-item) 
+       MUSI stać się klockiem o szerokości dokładnie 100% aktualnego ekranu */
+    .product-gallery-grid > div,
+    #productSlider > div,
+    #productSlider .main-photo, 
+    #productSlider .side-photo-item {
+        flex: 0 0 100% !important;      
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;     /* Blokuje oryginalne wymiary z PC */
+        scroll-snap-align: start !important; 
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        
+        /* Perfekcyjne centrowanie w pionie i poziomie */
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    /* OBRAZKI: Zmuszamy każdy obrazek w sliderze do dopasowania się do ekranu */
+    .product-gallery-grid img,
+    #productSlider img {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;     /* Zmusza obrazek do rozciągnięcia/skurczenia do szerokości slidera */
+        height: auto !important;
+        
+        aspect-ratio: 1 / 1 !important; /* Wymuszamy idealny, równy kwadrat dla każdego zdjęcia */
+        object-fit: contain !important; /* Pokazuje całą falbankę na środku, bez ucinania krawędzi */
+        
+        display: block !important;
+        margin: 0 auto !important;
     }
 }
 
@@ -2616,20 +2709,35 @@ html, body {
     color: #1a1a1a; /* Możesz też zmienić kolor na nieco ciemniejszy */
 }
 /* Galeria PC - Czysty układ */
+/* GŁÓWNY KONTENER GALERII (Dla komputerów PC) */
 .product-gallery-grid {
-        display: grid !important;
-        grid-template-columns: 2fr 1fr 1fr !important; /* Główne duże, dwa mniejsze */
-        gap: 0 !important; /* Usuwa przerwy, o których pisałaś */
-        margin-bottom: 40px;
-    }
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;            /* Elegancki odstęp między dwoma dużymi zdjęciami */
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
 
-    .product-gallery-grid img {
-        height: 600px !important; /* Stała wysokość na PC */
-        object-fit: cover;
-    }
+/* Pierwsze (główne) i drugie (boczne) zdjęcie dostają dokładnie po 50% szerokości */
+.product-gallery-grid .main-photo,
+.product-gallery-grid .side-photo-item {
+    flex: 1 1 50% !important;        /* Każde zdjęcie zajmuje równo połowę szerokości */
+    width: 50% !important;
+    max-width: 50% !important;
+    height: 600px !important;        /* Stała, elegancka wysokość na PC - możesz ją dostosować */
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
 
-.product-gallery-grid img:hover {
-    opacity: 0.9;
+/* Same obrazki wewnątrz kontenerów */
+.product-gallery-grid .main-photo img,
+.product-gallery-grid .side-photo-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;    /* Wypełnia całą przestrzeń 50/50, bez zniekształceń */
+    display: block !important;
+    transition: transform 0.3s ease !important;
 }
 @media (max-width: 768px) {
     .product-gallery-wrapper {
