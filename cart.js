@@ -172,9 +172,20 @@ function checkShippingMethod() {
 // 8. OTWIERANIE/ZAMYKANIE
 function toggleCart() {
     const modal = document.getElementById("cart-popup");
+    
+    // --- AUTOMATYCZNE ZAMYKANIE NAVBARU PRZY OTWIERANIU KOSZYKA ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
     if (modal.style.display === "none" || modal.style.display === "") {
         modal.style.display = "flex";
         document.body.style.overflow = "hidden"; // Blokada przewijania tła
+        
+        // Jeśli menu mobilne jest otwarte, to je zamykamy
+        if (navLinks && menuToggle) {
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
     } else {
         modal.style.display = "none";
         document.body.style.overflow = ""; // Przywrócenie domyślnego zachowania
@@ -182,7 +193,12 @@ function toggleCart() {
     }
 }
 
-
+// ZAMYKANIE KOSZYKA KLIKNIĘCIEM W TŁO
+document.getElementById('cart-popup').addEventListener('click', function(event) {
+    if (event.target === this) {
+        toggleCart(); 
+    }
+});
 
 
 
@@ -245,7 +261,7 @@ if (sliderGrid) {
 
 // 9. START SKRYPTU
 document.addEventListener('DOMContentLoaded', function() {
-    updateCart(); // To wywoła renderowanie, liczenie i badge za jednym razem
+    updateCart(); // Wywołuje renderowanie, liczenie i badge za jednym razem
     
     // Obsługa Menu mobilnego
     const menuToggle = document.querySelector('.menu-toggle');
@@ -262,8 +278,21 @@ document.addEventListener('DOMContentLoaded', function() {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
+
+    // --- POPRAWIONA OBSŁUGA STOPKI NA MOBILE ---
+    // Kod znajduje się wewnątrz DOMContentLoaded, więc elementy na pewno już istnieją!
+    document.querySelectorAll('.footer-column h3').forEach(header => {
+        header.addEventListener('click', () => {
+            if (window.innerWidth <= 768) { // Działa tylko na telefonach
+                const parent = header.parentElement;
+                parent.classList.toggle('active');
+                console.log('Kliknięto nagłówek stopki:', header.textContent); // Kontrola w konsoli
+            }
+        });
+    });
 });
 
+// Funkcja pomocnicza do pozycjonowania nawigacji
 function fixMobileNav() {
     if (window.innerWidth <= 768) {
         const nav = document.querySelector('.navbar');
@@ -277,17 +306,11 @@ function fixMobileNav() {
 
 window.addEventListener('scroll', fixMobileNav, { passive: true });
 window.addEventListener('resize', fixMobileNav);
-document.querySelectorAll('.footer-column h3').forEach(header => {
-    header.addEventListener('click', () => {
-        if (window.innerWidth <= 768) { // Działa tylko na telefonach
-            const parent = header.parentElement;
-            parent.classList.toggle('active');
-        }
-    });
-});
 
-// Link do Twojego skryptu Google (WKLEJ TU SWÓJ ADRES)
+// Link do Twojego skryptu Google
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyDFCFewwwFV1-eaMse4wIK8duVdVqGGeeVpfpLVLbWu0NxD4sGeposvsFBGshqJGb2/exec';      
+
+// Obsługa wysyłki formularza checkout
 document.getElementById('checkout-form').addEventListener('submit', function(e) {
     const termsAccepted = document.getElementById('terms-accept').checked;
 
@@ -299,28 +322,23 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     
     e.preventDefault(); // Zatrzymujemy wysyłkę do Formspree
 
-    // Pobieramy przycisk, aby go zablokować (zapobiega podwójnemu kliknięciu)
     const submitBtn = document.querySelector('.checkout-btn');
     if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerText = "Wysyłanie...";
     }
 
-    // 2. GENEROWANIE NUMERU ZAMÓWIENIA
     const d = new Date();
     const dateStr = d.getFullYear() + (d.getMonth() + 1).toString().padStart(2, '0') + d.getDate().toString().padStart(2, '0');
     const randomStr = Math.floor(1000 + Math.random() * 9000);
     const orderID = `UG-${dateStr}-${randomStr}`;
 
-    // 3. ZBIERANIE DANYCH Z FORMULARZA
     const formData = new FormData(this);
     const formEntries = Object.fromEntries(formData.entries());
     
-    // Sprawdzamy metodę dostawy
     const shippingMethodVal = document.getElementById('shipping-method').value;
     const isPaczkomat = (shippingMethodVal === "12");
 
-    // Przygotowanie obiektu z danymi do Arkusza Google
     const dataToSheet = {
         Numer_Zamowienia: orderID,
         name: formEntries.name,
@@ -329,29 +347,22 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
         Suma_Calkowita: document.getElementById('cart-total').innerText,
         Metoda_Dostawy: isPaczkomat ? "Paczkomat InPost" : "Kurier InPost",
         
-        // Pola zależne od wyboru dostawy
         Nr_Paczkomatu: isPaczkomat ? (document.getElementById('paczkomat-search').value || "Nie podano") : "---",
         street_full: isPaczkomat ? "---" : `${formEntries.street || ''} ${formEntries.house_no || ''}${formEntries.apt_no ? '/' + formEntries.apt_no : ''}`,
         zip: isPaczkomat ? "---" : (formEntries.zip || ''),
         city: isPaczkomat ? "---" : (formEntries.city || ''),
         
-        // Telefon (wybieramy ten, który został wypełniony)
         Telefon: isPaczkomat ? (document.getElementById('paczkomat-phone').value || formEntries.phone) : (formEntries.phone || document.getElementById('paczkomat-phone').value)
     };
 
-    // 4. WYSYŁKA DO GOOGLE SHEETS
     fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Wymagane przez Google Apps Script
+        mode: 'no-cors',
         cache: 'no-cache',
         body: JSON.stringify(dataToSheet)
     })
     .then(() => {
-        // Czyścimy koszyk z pamięci przeglądarki
         localStorage.removeItem('cart');
-        
-        // 5. PRZEKIEROWANIE NA STRONĘ PODZIĘKOWANIA
-        // Przekazujemy numer i imię w linku, aby strona podziękowania mogła je wyświetlić
         const nextUrl = `dziekujemy.html?order=${orderID}&name=${encodeURIComponent(formEntries.name)}`;
         window.location.href = nextUrl;
     })

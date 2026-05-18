@@ -656,69 +656,135 @@ button {
 /* --- OSTATECZNA NAPRAWA KOSZYKA MOBILE --- */
 @media (max-width: 768px) {
     
-    /* 1. Rozciągamy białe okno na całą szerokość i pozwalamy mu rosnąć w dół */
+    /* ==========================================================================
+       1. CZARNE TŁO POPUPU - Poprawione bez konfliktu z JS
+       ========================================================================== */
+    #cart-popup {
+        position: fixed !important;   
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;      
+        height: 100vh !important;     
+        background-color: rgba(0, 0, 0, 0.6) !important;
+        /* USUNĘLIŚMY stąd display: flex !important */
+        z-index: 9999 !important;
+        padding: 10px !important;     
+        box-sizing: border-box !important;
+    }
+
+    /* Ta nowa reguła zadziała TYLKO wtedy, gdy koszyk ma się wyświetlić.
+       Dzięki temu JS bez problemu go zamknie przywracając display: none */
+    #cart-popup[style*="display: flex"], 
+    #cart-popup[style*="display: block"] {
+        display: flex !important; /* Centruje elastycznie tylko po wywołaniu przez JS */
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    /* ==========================================================================
+       2. BIAŁE OKIENKO KOSZYKA
+       ========================================================================== */
     #cart-popup > div, 
     .popup-content, 
     .cart-popup-content {
-        width: 95% !important;         /* Prawie cała szerokość ekranu */
-        max-width: 95% !important;
-        height: auto !important;        /* Wysokość zależy od treści */
-        max-height: 90vh !important;    /* Nie więcej niż 90% ekranu */
-        display: block !important;      /* Kluczowe: wyłączamy kolumny */
-        padding: 40px 15px 20px 15px !important; /* Więcej miejsca na górze dla X */
-        overflow-y: auto !important;    /* Włączamy przewijanie */
-        margin: auto !important;
+        width: 95% !important;
+        max-width: 500px !important;   
+        height: auto !important;
+        max-height: 85vh !important;   
+        background: #fff !important;
+        display: block !important;     
+        padding: 40px 20px 20px 20px !important; 
+        overflow-y: auto !important;   /* To trzyma suwak wewnątrz */
+        position: relative !important; 
+        border-radius: 8px !important;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.3) !important;
+        margin: 0 auto !important; /* Dodatkowe zabezpieczenie centrowania */
     }
 
-    /* 2. Formularze, dane do wysyłki i produkty - wszystko pod sobą */
+    /* ==========================================================================
+       3. PRZYCISK ZAMKNIĘCIA (X) - Zawsze widoczny w prawym górnym rogu białego okna
+       ========================================================================== */
+    .close-popup,
+    #cart-popup .close-btn,
+    #cart-popup [onclick="toggleCart()"] { 
+        position: absolute !important;  
+        top: 10px !important;
+        right: 15px !important;
+        font-size: 28px !important;
+        line-height: 1 !important;
+        color: #333 !important;
+        cursor: pointer !important;
+        z-index: 1010 !important;      /* Wyżej niż jakakolwiek treść w koszyku */
+        padding: 5px !important;       /* Większy obszar do tapnięcia palcem */
+    }
+
+    /* ==========================================================================
+       4. UKŁAD WEWNĘTRZNY (Produkty i Formularze pod sobą)
+       ========================================================================== */
     .cart-grid, 
     .cart-content, 
     .cart-wrapper,
     .cart-content-wrapper {
-        display: block !important;      /* Wymuszamy układ pionowy */
+        display: block !important;     
     }
 
-    /* 3. Naprawa uciętych sekcji (Dostawa, Podsumowanie) */
     .cart-left, 
     .cart-right, 
     .shipping-section, 
     .summary-section {
-        width: 100% !important;         /* Każda sekcja zajmuje pełną szerokość */
+        width: 100% !important;         
         display: block !important;
         float: none !important;
         margin-bottom: 20px !important;
     }
 
-    /* 4. Przyciski i pola tekstowe - żeby nie wystawały */
+    /* ==========================================================================
+       5. POLA FORMULARZA I PRZYCISKI
+       ========================================================================== */
     input[type="text"], 
     input[type="email"], 
-    select, 
-    .checkout-btn, 
-    .coupon-section button {
-        width: 100% !important;         /* Szerokość dopasowana do okna */
-        box-sizing: border-box !important; /* Liczy szerokość razem z paddingiem */
+    select {
+        width: 100% !important;         
+        box-sizing: border-box !important; 
         height: 45px !important;
         margin: 5px 0 15px 0 !important;
+        padding: 10px !important;
+        font-size: 16px !important;    /* Zapobiega automatycznemu przybliżaniu (zoom) ekranu na iPhone'ach */
     }
 
-    /* 5. Przycisk "ZŁÓŻ ZAMÓWIENIE" - pełna widoczność */
     .checkout-btn {
         display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
         background-color: #000 !important;
         color: #fff !important;
         padding: 15px !important;
-        font-size: 18px !important;
-        height: auto !important;        /* Żeby tekst się nie uciął */
+        font-size: 16px !important;
+        font-weight: bold !important;
+        height: auto !important;        
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        margin-top: 15px !important;
     }
 
-    /* 6. Przycisk zamknięcia (X) w prawym górnym rogu */
-    .close-popup {
-        position: absolute !important;  
-        top: 10px !important;
-        right: 10px !important;
-        font-size: 30px !important;
-        line-height: 1 !important;
-        z-index: 1002 !important;
+    /* ==========================================================================
+       6. NAPRAWA ZDJĘĆ I SLIDERA - Widok całego produktu bez ucinania
+       ========================================================================== */
+    #productSlider img, 
+    .main-photo, 
+    .side-photo-item img {
+        width: 100% !important;
+        height: auto !important;        /* Wysokość dopasuje się naturalnie do proporcji zdjęcia */
+        max-height: 70vh !important;    /* Zdjęcie nie zajmie więcej niż 70% wysokości ekranu */
+        object-fit: contain !important; /* Zdjęcie dopasuje się w całości do ramki, nic nie zostanie ucięte */
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    /* Jeśli kontener slidera miał na sztywno ustawioną wysokość, 
+       również ustawiamy go na auto, by dopasował się do zdjęcia */
+    #productSlider {
+        height: auto !important;
     }
 }
 
@@ -2336,14 +2402,14 @@ html, body {
 
     .footer-column {
         width: 100%;
-        margin-bottom: 0 !important; /* Resetujemy margines, bo h3 ma swój padding */
+        margin-bottom: 15px !important; /* Odstęp między blokami menu */
     }
 
     .footer-column h3 {
         position: relative;
         cursor: pointer;
-        padding: 15px 0;
-        margin: 0;
+        padding: 10px 20px; /* Większy obszar do kliknięcia na telefonie */
+        margin-bottom: 0; /* Zerujemy, żeby nie robić dziury gdy lista jest zamknięta */
         border-bottom: 1px solid rgba(0,0,0,0.05);
         display: flex;
         justify-content: center;
@@ -2352,29 +2418,39 @@ html, body {
         text-transform: uppercase;
     }
 
+    /* Plusik po prawej stronie nagłówka */
     .footer-column h3::after {
-        content: '∨';
-        font-size: 12px;
-        margin-left: 10px;
-        transition: transform 0.3s ease;
+        content: '❯'; /* Cienki, elegancki grot */
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%) rotate(90deg); /* Obracamy w dół */
+        transition: transform 0.3s ease, color 0.3s ease;
+        font-size: 0.8rem; /* Nieco mniejsza, by wyglądała subtelnie */
+        color: #d1bfa7; /* Twój delikatny beżowy/złoty kolor z navbaru */
     }
 
+    /* Płynny obrót strzałki do góry, gdy sekcja jest otwarta */
     .footer-column.active h3::after {
-        transform: rotate(180deg);
+        transform: translateY(-50%) rotate(-90deg); /* Obracamy w górę */
+        color: #3c0000; /* Zmiana koloru na Twój bordowy przy otwarciu */
     }
 
-    /* Ukrywamy listę */
+    /* --- PŁYNNE CHOWANIE I POKAZYWANIE LISTY --- */
     .footer-column ul {
-        display: none; 
-        padding: 15px 0 !important;
+        max-height: 0; /* Domyślnie schowane */
+        overflow: hidden; /* Odcina wszystko, co wystaje poza wysokość 0 */
+        transition: max-height 0.3s ease-out; /* Płynna animacja */
+        padding: 0 15px !important; /* Bezpieczny padding boczny */
         margin: 0 !important;
         list-style: none;
-        background: rgba(0,0,0,0.02); /* Delikatne tło pod rozwiniętą listą */
+        background: rgba(0,0,0,0.02); /* Twoje delikatne tło pod rozwiniętą listą */
     }
 
-    /* Pokazujemy listę */
+    /* Gdy dodamy klasę .active przez JS, płynnie rozwijamy wysokość listy */
     .footer-column.active ul {
-        display: block !important;
+        max-height: 300px; /* Bezpieczna wysokość, która pomieści Twoje linki */
+        padding: 15px !important; /* Nadajemy pionowe odstępy dopiero po rozwinięciu */
     }
 
     .footer-bottom {
