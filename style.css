@@ -163,6 +163,8 @@ To jest koniec komentarza*/
     width: 100% !important;
     display: flex;
     flex-direction: column;
+    position: relative; /* KLUCZ: Trzyma plakietkę Bestseller wewnątrz karty */
+    z-index: 1;
 }
 
 .image-container {
@@ -257,7 +259,7 @@ a, a:visited, a:hover, a:active {
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 4px;
-    z-index: 10;
+    z-index: 100; /* Wychodzi nad tło, ale chowa się pod otwartym menu */
 }
 /* --- 5. STRONA PRODUKTU & GALERIA (PC) --- */
 .product-page-container {
@@ -2347,6 +2349,7 @@ html, body {
     transform: translateX(-50%);
     padding: 0;
     margin-top: 20px; /* Zmniejszono z 50px - to podciągnie falbankę do góry */
+    z-index: 20;
 }
 
 /* 4. KONTENER NA KOLUMNY - Tu dzieje się magia układu */
@@ -3311,4 +3314,131 @@ html, body {
     .tooltip-content::after {
         left: 90%;
     }
+}
+/* --- AKTUALIZACJA: POWIĘKSZONE LOGO DOSUNIĘTE DO LEWEJ --- */
+
+/* Kontener łączący logo i napis */
+.navbar-logo {
+    margin-right: auto;      /* Spycha całe logo na lewo, a menu na prawo */
+    display: flex;
+    align-items: center;     /* Wyrównuje elementy w pionie */
+    gap: 16px;               /* Odstęp między sygnetem a napisem */
+    text-decoration: none;
+    padding-left: 20px;      /* POWRÓT: Dosunięcie do lewej krawędzi ekranu (zamiast 5%) */
+    line-height: 1;          /* Idealne centrowanie wysokości tekstu */
+}
+
+/* Wielkość sygnetu SVG na falbance - POWIĘKSZONY */
+.navbar-logo img {
+    height: 48px;            /* Wyraźne, duże logo */
+    width: auto;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+/* Styl dla napisu obok logo - POWIĘKSZONY */
+.logo-text {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;         /* Czytelna, wyraźna nazwa marki */
+    font-weight: 500;        
+    color: #4a3728;          
+    letter-spacing: 0.18em;  /* Elegancki rozstaw liter */
+    white-space: nowrap;     
+    transition: color 0.2s ease;
+}
+
+/* Efekt najazdu myszką */
+.navbar-logo:hover img {
+    transform: scale(1.03);  
+}
+.navbar-logo:hover .logo-text {
+    color: #6d533e;          
+}
+/* --- DOPASOWANIE DLA TELEFONÓW (OPCJA 1 NA STERYDACH) --- */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 15px 20px; /* Zmniejszamy delikatnie padding falbanki na telefonie */
+    }
+    
+    .navbar-logo {
+        padding-left: 0;   /* Zerujemy margines, by maksymalnie wykorzystać przestrzeń od krawędzi */
+        gap: 10px;         /* Przybliżamy delikatnie napis do kółka */
+    }
+
+    .navbar-logo img {
+        height: 38px;      /* Subtelnie zmniejszamy kółko na telefonie, żeby było zgrabne */
+    }
+
+    .logo-text {
+        font-size: 12px;   /* Zmniejszamy czcionkę do 12px – napis będzie ultra-elegancki i na pewno zmieści się obok menu */
+        letter-spacing: 0.12em; /* Delikatnie ciaśniejszy rozstaw na małym ekranie */
+    }
+}
+/* ==========================================================================
+   POPRAWKI MOBILNEGO MENU (Bezpieczne dla kształtu falbanki)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    /* 1. KRESEK MENU PILNUJEMY TYLKO, ŻEBY NIE UCIERAŁY Z EKRANU */
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        padding-right: 15px; /* Delikatne, bezpieczne odsunięcie od prawej krawędzi */
+    }
+
+   /* 2. MENU MOBILNE – INTEGRACJA Z NAVBAREM */
+    .nav-links {
+        display: none;             /* Ukryte domyślnie */
+        flex-direction: column;
+        align-items: center;       
+        position: absolute;        
+        top: 100%;                 /* Startuje dokładnie od dolnej krawędzi prostego paska */
+        left: 0;
+        width: 100%;
+        background-color: #ffffff; /* Czyste białe tło menu */
+        padding: 40px 0 30px 0;    /* Odpowiedni dystans dla tekstu */
+        gap: 22px;                 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        margin-top: 0;             /* Resetujemy wszelkie marginesy, które płatały figle */
+        
+        /* Bardzo ważna linijka – menu musi ustąpić miejsca falbance, która zaraz je przykryje */
+        z-index: 99;               
+    }
+
+    /* Gdy menu dostaje klasę active po kliknięciu */
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* 3. WYGLĄD LINKÓW W MENU */
+    .nav-links a {
+        font-size: 16px;
+        letter-spacing: 0.1em;
+        text-align: center;
+        width: 100%;
+        color: #4a3728;
+        text-decoration: none;
+    }
+}
+
+/* ==========================================================================
+   PANCERNE POZYCJONOWANIE STRONY (Zabezpieczenie przed prześwitami)
+   ========================================================================== */
+/* GŁÓWNY NAVBAR – BAZA DLA CAŁOŚCI */
+.navbar {
+    position: relative; /* lub fixed/sticky, jeśli masz go przypiętego do góry */
+    z-index: 10000 !important; /* Absolutny, najwyższy priorytet na całej stronie */
+}
+
+/* WYMUSZENIE WIDOCZNOŚCI IKONY I LOGO */
+.navbar-logo, .menu-toggle {
+    position: relative;
+    z-index: 10001 !important; /* Muszą być zawsze nad białym tłem menu */
+}
+
+/* Jeśli pod sekcją falbanki masz główny kontener strony (np. main lub pierwszą sekcję pod nav), 
+   warto upewnić się, że przy przewijaniu ma on odpowiedni priorytet warstw */
+main, .hero, section {
+    position: relative;
+    z-index: 1; /* Treść strony zostaje na dole, dzięki czemu gładko chowa się pod warstwę nav */
 }
