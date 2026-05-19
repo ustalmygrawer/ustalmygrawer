@@ -298,22 +298,55 @@
 
 <script>
    // Upewnij się, że tablica ma poprawne nazwy plików!
-// Tablica ze zdjęciami - upewnij się, że nazwy są identyczne jak pliki!
+// Tablica ze zdjęciami bordowej ramki
 const galleryImages = [
     "bordowafalbanka1.jpg", 
     "bordowafalbanka2.jpg", 
     "bordowafalbanka3.jpg"
 ];
 
+let currentModalIndex = 0;
+
+// Funkcja pomocnicza obsługująca klawisze (wyciągnięta osobno)
+function handleLightboxKeyboard(event) {
+    if (event.key === "Escape" || event.key === "Esc") {
+        closeFullImg();
+    } else if (event.key === "ArrowLeft") {
+        changeModalImg(-1);
+    } else if (event.key === "ArrowRight") {
+        changeModalImg(1);
+    }
+}
+
 function openFullImg(index) {
     const modal = document.getElementById("imgModal");
     const container = document.getElementById("imgContainer");
     
     if (modal && container) {
-        container.src = galleryImages[index];
+        currentModalIndex = index;
+        container.src = galleryImages[currentModalIndex];
         modal.style.display = "flex";
-        document.body.style.overflow = "hidden"; // Blokada przewijania tła
+        document.body.style.overflow = "hidden";
+        
+        // PANCERNE ROZWIĄZANIE: Włączamy nasłuchiwanie DOKŁADNIE w momencie otwarcia okna
+        window.addEventListener('keydown', handleLightboxKeyboard);
     }
+}
+
+function changeModalImg(direction) {
+    const container = document.getElementById("imgContainer");
+    if (!container) return;
+    
+    currentModalIndex += direction;
+    
+    if (currentModalIndex < 0) {
+        currentModalIndex = galleryImages.length - 1;
+    }
+    if (currentModalIndex >= galleryImages.length) {
+        currentModalIndex = 0;
+    }
+    
+    container.src = galleryImages[currentModalIndex];
 }
 
 function closeFullImg() {
@@ -322,8 +355,11 @@ function closeFullImg() {
     
     if (modal) {
         modal.style.display = "none";
-        container.src = ""; // Czyścimy źródło, żeby nie było 'ducha'
-        document.body.style.overflow = "auto"; // Przywracamy przewijanie
+        container.src = "";
+        document.body.style.overflow = "auto";
+        
+        // PANCERNE ROZWIĄZANIE: Wyłączamy nasłuchiwanie przy zamykaniu, żeby nie marnować pamięci laptopa
+        window.removeEventListener('keydown', handleLightboxKeyboard);
     }
 }
 </script>
@@ -385,9 +421,23 @@ function closeFullImg() {
     </div>
 </footer>
 <!-- Modal do powiększania zdjęć -->
-<div id="imgModal" class="popup-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 99999; justify-content: center; align-items: center;" onclick="closeFullImg()">
-    <span class="close-btn" style="position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer;">&times;</span>
-    <img id="imgContainer" src="" style="max-width: 90%; max-height: 90%; object-fit: contain; border: none;">
+<div id="imgModal" class="popup-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center;" onclick="closeFullImg()">
+    
+    <button class="modal-arrow prev" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.6); font-size: 35px; cursor: pointer; padding: 10px; z-index: 100000; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">&#10094;</button>
+    
+    <div style="position: relative; max-width: 85%; max-height: 80%; display: flex; justify-content: center; align-items: center;" onclick="event.stopPropagation();">
+        
+        <span class="close-btn" style="position: absolute; top: -18px; right: -12px; color: #ffffff; font-size: 26px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 200; cursor: pointer; z-index: 100010; line-height: 1; padding: 0; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: transform 0.2s ease, background-color 0.2s ease;" 
+              onclick="closeFullImg();"
+              onmouseover="this.style.transform='scale(1.08)'; this.style.backgroundColor='#2a2a2a';" 
+              onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#1a1a1a';">
+            &#10005;
+        </span>
+
+        <img id="imgContainer" src="" style="max-width: 100%; max-height: 80vh; object-fit: contain; border: none; display: block; border-radius: 4px;">
+    </div>
+    
+    <button class="modal-arrow next" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.6); font-size: 35px; cursor: pointer; padding: 10px; z-index: 100000; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">&#10095;</button>
 </div>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>

@@ -1,6 +1,10 @@
 /* --- 1. PODSTAWOWE USTAWIENIA (RESET) --- */
+html {
+    scroll-behavior: smooth;    /* Płynne zjeżdżanie na dół działa bez zarzutu */
+    overflow-x: hidden;         /* BLOKADA: Żaden element nie ma prawa stworzyć poziomego suwaka */
+}
+
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -8,19 +12,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Wymusza wysokość równą wysokości okna */
-}
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-}
-
-body { 
-    font-family: 'Helvetica Neue', Arial, sans-serif; 
-    background-color: #ffffff; 
-    color: #4a3728;
-    overflow-x: hidden; 
+    min-height: 100vh;
+    overflow-x: hidden;         /* Podwójne zabezpieczenie dla świętego spokoju */
     width: 100%;
 }
 
@@ -2836,6 +2829,12 @@ html, body {
     .product-gallery-grid {
         gap: 0 !important; /* Usuwa białe paski między zdjęciami */
         margin-bottom: 0 !important;
+    }
+}
+@media (max-width: 768px) {
+    .modal-arrow {
+        font-size: 30px !important; /* Mniejsze strzałki na telefonie */
+        opacity: 0.6;
     }
 }
 .about-image {
