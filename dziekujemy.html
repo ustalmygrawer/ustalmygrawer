@@ -72,9 +72,14 @@
             <p><strong>Przelew tradycyjny:</strong><br>
                Nr konta: <span style="letter-spacing: 1px;">55 1160 2202 0000 0003 8220 0669</span><br>
                Odbiorca: USTALMY Anna Kozłowska</p>
-            <p style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee;">
+            
+            <p id="total-amount-container" style="margin-top: 10px; display: none;">
+               <strong>Kwota do zapłaty:</strong> <span id="transfer-amount" style="font-size: 1.05rem; color: #1a1a1a;">---</span>
+            </p>
+
+            <p style="margin-top: 12px; padding-top: 10px; border-top: 1px solid #eee;">
                <strong>Tytuł przelewu:</strong> 
-        <span id="transfer-title">Zamówienie - [Twoje Imię i Nazwisko]</span>
+               <span id="transfer-title">Zamówienie - [Twoje Imię i Nazwisko]</span>
             </p>
         </div>
 
@@ -86,21 +91,38 @@
 
         <a href="index.html" class="btn-home">Powrót do strony głównej</a>
     </div>
-      <script>
+
+    <script>
     // Po wejściu na stronę podziękowania, usuwamy dane z pamięci przeglądarki
     localStorage.removeItem('cart');
-    // Jeśli używasz innej nazwy w cart.js, upewnij się że tu jest taka sama
-    window.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderID = urlParams.get('order');
-    const clientName = urlParams.get('name'); // Pobieramy imię z adresu
-    const titleElement = document.getElementById('transfer-title');
     
-    if (orderID) {
-        const nameText = clientName ? decodeURIComponent(clientName) : "[Twoje Imię i Nazwisko]";
-        titleElement.innerHTML = `Zamówienie nr <strong>${orderID}</strong> - ${nameText}`;
-    }
-});
-</script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderID = urlParams.get('order');
+        const clientName = urlParams.get('name'); // Pobieramy imię z adresu
+        const totalAmount = urlParams.get('total') || urlParams.get('amount') || urlParams.get('suma'); // Elastyczne pobieranie kwoty
+        
+        const titleElement = document.getElementById('transfer-title');
+        const amountElement = document.getElementById('transfer-amount');
+        const amountContainer = document.getElementById('total-amount-container');
+        
+        // 1. Ustawianie Tytułu Przelewu
+        if (orderID) {
+            const nameText = clientName ? decodeURIComponent(clientName) : "[Twoje Imię i Nazwisko]";
+            titleElement.innerHTML = `Zamówienie nr <strong>${orderID}</strong> - ${nameText}`;
+        }
+        
+        // 2. Dynamiczne wstrzykiwanie Kwoty (jeśli została przekazana w adresie URL)
+        if (totalAmount) {
+            // Czyszczenie i ładne formatowanie waluty (np. dodanie " zł")
+            let formattedAmount = decodeURIComponent(totalAmount).trim();
+            if (!formattedAmount.includes('zł')) {
+                formattedAmount += ' zł';
+            }
+            amountElement.innerHTML = `<strong>${formattedAmount}</strong>`;
+            amountContainer.style.display = 'block'; // Pokazujemy ukryty bloczek z kwotą
+        }
+    });
+    </script>
 </body>
 </html>

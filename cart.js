@@ -363,7 +363,10 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     })
     .then(() => {
         localStorage.removeItem('cart');
-        const nextUrl = `dziekujemy.html?order=${orderID}&name=${encodeURIComponent(formEntries.name)}`;
+        // Pobieramy tekst kwoty końcowej (np. "120.00 zł")
+        const rawTotal = document.getElementById('cart-total').innerText;
+        // Budujemy link przekazując numer zamówienia, imię oraz kwotę
+        const nextUrl = `dziekujemy.html?order=${orderID}&name=${encodeURIComponent(formEntries.name)}&total=${encodeURIComponent(rawTotal)}`;
         window.location.href = nextUrl;
     })
     .catch(error => {
