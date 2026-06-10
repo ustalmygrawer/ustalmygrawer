@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dziękujemy za wiadomość - Ustalmy Grawer</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Tło całej strony - delikatna, uspokajająca zieleń */
+body {
+    background-color: #e7e4d5 !important; /* Przykład zieleni: szałwiowa/pastelowa */
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif; /* Twoja czcionka */
+}
+
+/* Kontener formularza - wyróżnik (jasny "box") */
+.contact-header-container {
+    background-color: #ffffff !important; /* Biały środek */
+    padding: 40px !important;             /* Odstęp wewnątrz kontenera */
+    border-radius: 30px !important;       /* Zaokrąglenie rogów */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important; /* Delikatny cień dla głębi */
+    max-width: 900px;                     /* Szerokość kontenera */
+    margin: 50px auto;                    /* Wyśrodkowanie kontenera na stronie */
+}
         .thank-you-container {
             text-align: center;
             padding: 100px 20px;
@@ -36,20 +54,46 @@
             /* Usunąłem stąd kolor, żeby nie było konfliktu */
         }
         .btn-home:hover {
-            background-color: #e7e4d5;
+            background-color: #899482;
             transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-
+<div class="thank-you-logo" style="text-align: center; margin-top: 20px; margin-bottom: 0px;">
+    <a href="index.html">
+        <img src="logo bordo.svg" alt="Logo Ustalmy Grawer" style="max-width: 50px; height: auto;">
+    </a>
+</div>
     <div class="thank-you-container">
         <h1>Dziękujemy!</h1>
         <p>Twoja wiadomość została wysłana pomyślnie. <br> 
         Odpowiemy na nią tak szybko, jak to możliwe – zazwyczaj zajmuje nam to do 24 godzin.</p>
         
         <a href="index.html" class="btn-home" style="color: #ffffff !important; text-decoration: none !important;">POWRÓT DO STRONY GŁÓWNEJ</a>
+    <div class="thank-you-social" style="text-align: center; margin-top: 40px; border-top: 1px solid #dcdcdc; padding-top: 30px;">
+    <p style="margin-bottom: 15px; color: #4a3728;">Zapraszamy do obserwowania nas w social mediach:</p>
+    
+    <div class="social-icons-wrapper" style="display: flex; justify-content: center; gap: 20px;">
+        <a href="http://www.facebook.com/profile.php?id=61572027870815" target="_blank" rel="noopener" aria-label="Facebook" style="width: 25px; color: #4a3728;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+        </a>
+        <a href="https://www.instagram.com/ustalmygrawer/" target="_blank" aria-label="Instagram" style="width: 25px; color: #4a3728;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-miterlimit="10">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </a>
+        <a href="https://www.tiktok.com/@ustalmygrawer" target="_blank" aria-label="TikTok" style="width: 25px; color: #4a3728;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+            </svg>
+        </a>
     </div>
-
+</div>
+    </div>
 </body>
 </html>

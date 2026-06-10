@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
@@ -68,9 +68,8 @@
 <main class="content-wrapper">
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="bordowafalbanka1.jpg" onclick="openFullImg(0)"></div>
-            <div class="swiper-slide"><img src="bordowafalbanka2.jpg" onclick="openFullImg(1)"></div>
-            <div class="swiper-slide"><img src="bordowafalbanka3.jpg" onclick="openFullImg(2)"></div>
+            <div class="swiper-slide"><img src="mokka_classy.jpg" onclick="openFullImg(0)"></div>
+            <div class="swiper-slide"><img src="mokka_classy2.jpg" onclick="openFullImg(1)"></div>
         </div>
         
         <!-- STRZAŁKI MUSZĄ BYĆ TUTAJ (wewnątrz .swiper) -->
@@ -78,34 +77,28 @@
         <div class="swiper-button-prev"></div>
     </div>
 
+
     <!-- Poniżej sekcja informacji o produkcie -->
     <div class="product-main-info">
         <div class="title-price-row">
-            <h1 class="product-title">INSTAX MINI BORDOWA FALBANKA</h1>
-            <div class="product-color-selector">
-        <span class="label">Wybierz kolor:</span>
-        <div class="swatches">
-            <a href="bordowa_falbanka-details.html" class="swatch active" style="background-color: #592227;" title="Bordowy"></a>
-            <a href="brazowa_falbanka-details.html" class="swatch" style="background-color: #a99a8a;" title="Brązowy"></a>
-        </div>
-    </div>
-            <span class="product-price">35,00 zł</span>
-            <button class="buy-button" id="buy-btn" onclick="addToCart('Bordowa Falbanka', 35, 'bordowafalbanka1.jpg')">
+            <h1 class="product-title">INSTAX MINI MOKKA CLASSY</h1>
+            <span class="product-price">30,00 zł</span>
+            <button class="buy-button" id="buy-btn" onclick="addToCart('Mokka Classy', 30, 'mokka_classy.jpg')">
                 DODAJ DO KOSZYKA
             </button>
         </div>
         
         <div class="product-description-full">
-        <h3>Wyrazisty Akcent w Twoim Domu</h3>
-        <p class="lead"><em>Zaproś do swojego wnętrza szlachetny odcień bordo, który w połączeniu z unikalnym kształtem „falbanki” tworzy oprawę pełną pasji i elegancji.</em></p>
-
-        <p>Postaw na kolor, który rządzi wnętrzami. Głęboki, nasycony odcień bordo nadaje wnętrzu luksusowego charakteru, idealnie podkreślając barwy Twoich ulubionych fotografii. <strong>Bordowa Falbanka</strong> to nie tylko <strong>stylowa ramka na zdjęcia</strong>, ale małe dzieło sztuki, które przyciąga wzrok i ociepla domową galerię wspomnień.</p>
-        
-        <p>Model ten charakteryzuje się subtelnym, falowanym wykończeniem, które nadaje mu lekkości i unikalnego stylu. Niezależnie od tego, czy szukasz oprawy na <strong>zdjęcie Instax</strong>, czy chcesz zachować najważniejsze chwile jako <strong>pamiątka USG</strong>, bordowa falbanka sprawdzi się idealnie. <br><strong>Nasz autorski system slide-in</strong> pozwala na wymianę zdjęcia w sekundę – po prostu wsuwasz fotografię od góry w specjalną szczelinę, bez konieczności rozkładania ramki.</p>
+            <h3>Elegancja w Twoim wnętrzu</h3>
+            <p class="lead"><em>Poznaj <strong>Mokka Classy</strong>, naszą najnowszą odsłonę ręcznie robionej ramki, która łączy w sobie ponadczasową klasykę z nowoczesnym designem.</em></p>
+    
+    <p>To stylowa ramka na zdjęcia, stworzona z myślą o osobach, które cenią detale i ciepło domowego ogniska. Jej głęboki, wyrafinowany odcień sprawia, że Mokka Classy to nie tylko ramka na odbitki Instax, ale przede wszystkim wyjątkowa dekoracja, która dodaje wnętrzu charakteru.</p>
+    
+    <p>Niezależnie od tego, czy szukasz idealnej oprawy dla swoich wspomnień z podróży, czy potrzebujesz eleganckiej pamiątki USG, model ten sprawdzi się wyśmienicie. Mokka Classy została zaprojektowana w duchu funkcjonalności <strong>nasz autorski system montażu pozwala na błyskawiczne wsunięcie zdjęcia, bez obaw o jego uszkodzenie.</strong></p>
             <div class="product-specs-card">
     <div class="spec-item"><strong>Materiał:</strong> Drewno ręcznie malowane</div>
     <div class="spec-item"><strong>System:</strong> Slide-in (wsuwanie od góry)</div>
-    <div class="spec-item"><strong>Wymiary:</strong> 12,5 x 11 cm</div>
+    <div class="spec-item"><strong>Wymiary:</strong> 10 x 8,6 cm</div>
 </div>
         </div>
     </div>
@@ -130,78 +123,6 @@
 </div>
 
 <style>
-    /* GŁÓWNY KONTENER */
-.gallery-hero-grid-3 {
-    display: grid !important;
-    grid-template-columns: 2fr 1fr !important; /* Lewa strona 2x większa niż prawa */
-    gap: 15px !important;
-    width: 100% !important;
-}
-
-/* DUŻE ZDJĘCIE */
-.hero-photo-3 {
-    height: 500px !important;
-    overflow: hidden !important;
-}
-
-.hero-photo-3 img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    border-radius: 15px !important;
-    cursor: pointer !important;
-    transition: transform 0.4s ease !important;
-}
-
-/* KOLUMNA Z MAŁYMI ZDJĘCIAMI */
-.side-photos-3 {
-    display: grid !important;
-    grid-template-rows: 1fr 1fr !important; /* Dwa równe rzędy */
-    gap: 15px !important;
-}
-
-.side-photo-item-3 {
-    height: 242px !important;
-    overflow: hidden !important;
-}
-
-.side-photo-item-3 img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    border-radius: 15px !important;
-    cursor: pointer !important;
-    transition: transform 0.4s ease !important;
-}
-
-/* EFEKT POWIĘKSZENIA */
-.gallery-hero-grid-3 img:hover {
-    transform: scale(1.05) !important;
-}
-.product-gallery-wrapper {
-    width: 100% !important;
-    /* To jest kluczowa linijka, która robi odstęp od falbanki */
-    margin-top: 50px !important; 
-    margin-bottom: 30px !important;
-}
-
-/* Przesunięcie pierwszego zdjęcia w kolumnie bocznej (to na górze) */
-.gallery-hero-grid-3 .side-photos-3 .side-photo-item-3:nth-child(1) img {
-    /* Zwiększaj wartość procentową (np. 40%, 50%), żeby zdjęcie szło w dół */
-    object-position: center 40% !important; 
-}
-.gallery-hero-grid-3 .side-photos-3 {
-    grid-template-rows: 1fr 1fr !important;
-    gap: 15px !important;
-}
-
-/* Korekta kadrowania dla trzeciego zdjęcia (nth-child(2) w kolumnie bocznej) */
-.gallery-hero-grid-3 .side-photos-3 .side-photo-item-3:nth-child(2) img {
-    /* Zmień 'bottom' na wartość procentową. 
-       Im wyższa wartość (np. 80%, 90%), tym bardziej zdjęcie pójdzie w dół. */
-    object-position: center 90% !important; 
-}
-
     .product-description-full {
     margin: 40px 0;
     line-height: 1.8;
@@ -260,7 +181,7 @@
     margin-bottom: 4px;
     font-weight: 800;         /* ZMIANA: Zwiększamy z 600 na 800 (Extra Bold) */
 }
-   .safety-info-container {
+    .safety-info-container {
     margin: 60px 0;
     padding: 40px;
     background-color: #fcfbf9; /* Bardzo delikatny, kremowy odcień */
@@ -318,67 +239,14 @@
         color: #333;
         font-weight: 600;
     }
-/* UKŁAD DLA TELEFONÓW (ekrany węższe niż 768px) */
-@media (max-width: 768px) {
-    .gallery-hero-grid-3 {
-        grid-template-columns: 1fr !important; /* Jedna kolumna zamiast dwóch */
-    }
 
-    .hero-photo-3 {
-        height: 350px !important; /* Mniejsza wysokość na telefon */
-    }
-
-    .side-photos-3 {
-        grid-template-columns: 1fr 1fr !important; /* Dwa zdjęcia obok siebie na dole */
-        grid-template-rows: auto !important;
-    }
-
-    .side-photo-item-3 {
-        height: 180px !important; /* Mniejsza wysokość zdjęć bocznych */
-    }
-}
     @media (max-width: 768px) {
         .safety-info-container {
             margin-top: 30px;
             padding: 20px;
         }
     }
-    .product-color-selector {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 15px 0;
-}
-
-.product-color-selector .label {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    color: #666;
-    text-transform: uppercase;
-}
-
-.swatches {
-    display: flex;
-    gap: 10px;
-}
-
-.swatch {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1px #ccc; /* Delikatna obwódka */
-    transition: transform 0.2s;
-}
-
-.swatch:hover {
-    transform: scale(1.1);
-}
-
-.swatch.active {
-    box-shadow: 0 0 0 2px #5a1827; /* Obwódka dla wybranego produktu */
-}
-.related-products {
+    .related-products {
     margin: 60px 0;
     text-align: center;
 }
@@ -388,8 +256,7 @@
     color: #5a1827;
     margin-bottom: 30px;
 }
-
-   .product-grid {
+    .product-grid {
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -446,26 +313,24 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-.swiper-slide:nth-child(3) img {
-    /* Pierwsza wartość to poziom (środek), druga to pion (przesunięcie w górę) */
-    /* 50% 50% to środek, więc zmniejszamy drugą wartość, aby zdjęcie poszło w górę */
-    object-position: 50% 100% !important; 
+.mySwiper {
+    margin-bottom: 9px !important; /* Tutaj ustawiasz wielkość przerwy w pikselach */
 }
 </style>
-<section class="related-products">
+    <section class="related-products">
     <h2 class="section-title">Zobacz również</h2>
     <div class="product-grid">
         <a href="jodełka-details.html" class="product-card">
-    <img src="jodelka1.jpg" alt="Jodełka"> 
-    <div class="card-info">
-        <h3>Jodełka</h3>
-        <p>Instax Mini</p>
-    </div>
-</a>
-        <a href="mokka_classy-details.html" class="product-card">
-            <img src="mokka_classy.jpg" alt="Mokka Classy">
+            <img src="jodelka1.jpg" alt="Jodełka">
             <div class="card-info">
-                <h3>Mokka Classy</h3>
+                <h3>Jodełka</h3>
+                <p>Instax Mini</p>
+            </div>
+        </a>
+        <a href="bordowa_falbanka-details.html" class="product-card">
+            <img src="bordowafalbanka1.jpg" alt="Bordowa Falbanka">
+            <div class="card-info">
+                <h3>Bordowa Falbanka</h3>
                 <p>Instax Mini</p>
             </div>
         </a>
@@ -492,48 +357,51 @@
                 <p class="section-label">DANE DO WYSYŁKI:</p>
                 
                 <form id="checkout-form">
-    <input type="hidden" name="_next" value="https://ustalmygrawer.github.io/ustalmygrawer/dziekujemy.html">                
-    <input type="hidden" name="Produkty" id="form-products">
-    <input type="hidden" name="Suma_Calkowita" id="form-total">
-    <input type="hidden" name="Zastosowany_Rabat" id="form-discount">
-    
-    <input type="text" name="name" placeholder="Imię i Nazwisko" required class="cart-input">
-    <input type="email" name="email" placeholder="E-mail" required class="cart-input">
-    
-    <div id="paczkomat-box" class="sub-box">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
-            <label>NUMER PACZKOMATU: *</label>
-            <div class="tooltip-container">
-                <span class="info-icon">?</span>
-                <div class="tooltip-content">
-                    <p>Znajdź paczkomat na mapie i wpisz jego kod (np. <b>KRA01M</b>) w pole poniżej.</p>
-                </div>
+                    <input type="hidden" name="_next" value="https://ustalmygrawer.github.io/ustalmygrawer/dziekujemy.html">                
+                    <input type="hidden" name="Produkty" id="form-products">
+                    <input type="hidden" name="Suma_Calkowita" id="form-total">
+                    <input type="hidden" name="Zastosowany_Rabat" id="form-discount">
+                    
+                    <input type="text" name="name" placeholder="Imię i Nazwisko" required class="cart-input">
+                    <input type="email" name="email" placeholder="E-mail" required class="cart-input">
+                    
+                    <div id="paczkomat-box" class="sub-box">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
+        <label>NUMER PACZKOMATU: *</label>
+        
+        <div class="tooltip-container">
+            <span class="info-icon">?</span>
+            <div class="tooltip-content">
+                <p>Znajdź paczkomat na mapie i wpisz jego kod (np. <b>KRA01M</b>) w pole poniżej.</p>
+                <img src="instrukcja-paczkomat.jpg" alt="Jak znaleźć kod" style="width:100%; border-radius:4px; margin-top:5px;">
             </div>
         </div>
-
-        <input type="text" id="paczkomat-search" name="Nr_Paczkomatu" placeholder="Wklej kod paczkomatu Np. KRA01M" class="cart-input" required>
-        
-        <a href="https://inpost.pl/znajdz-paczkomat" target="_blank" class="inpost-map-btn" style="display: block; text-align: center; line-height: 1.0; padding: 10px 5px;">
-            WYSZUKAJ KOD PACZKOMATU
-        </a>
-
-        <label style="display:block; margin-top:10px; font-size:12px;">NUMER TELEFONU: *</label>
-        <input type="tel" id="paczkomat-phone" name="Telefon_Paczkomat" placeholder="Dla powiadomień InPost" class="cart-input" required>
     </div>
 
-    <div id="address-box" class="sub-box" style="display: none;"> 
-        <input type="text" name="street" placeholder="Ulica" class="cart-input">
-        <div class="input-row" style="display: flex; gap: 10px;">
-            <input type="text" name="house_no" placeholder="Nr domu" class="cart-input">
-            <input type="text" name="apt_no" placeholder="Nr mieszkania" class="cart-input">
-        </div>
-        <div class="input-row" style="display: flex; gap: 10px;">
-            <input type="text" name="zip" placeholder="Kod pocztowy" class="cart-input">
-            <input type="text" name="city" placeholder="Miejscowość" class="cart-input">
-        </div>
-        <input type="tel" id="phone" name="phone" placeholder="Telefon dla kuriera" class="cart-input" required>
-    </div>
-</form>
+    <input type="text" id="paczkomat-search" name="Nr_Paczkomatu" placeholder="Wklej kod paczkomatu Np. KRA01M" class="cart-input" required>
+    
+    <a href="https://inpost.pl/znajdz-paczkomat" target="_blank" class="inpost-map-btn" 
+   style="display: block; text-align: center; line-height: 1.0; padding: 10px 5px;">
+    WYSZUKAJ KOD PACZKOMATU<br>
+</a>
+
+    <label style="display:block; margin-top:10px; font-size:12px;">NUMER TELEFONU:</label>
+    <input type="tel" id="paczkomat-phone" name="Telefon_Paczkomat" placeholder="Dla powiadomień InPost" class="cart-input">
+</div>
+
+                    <div id="address-box" class="sub-box" style="display: none;"> 
+                        <input type="text" name="street" placeholder="Ulica" class="cart-input">
+                        <div class="input-row" style="display: flex; gap: 10px;">
+                            <input type="text" name="house_no" placeholder="Nr domu" class="cart-input">
+                            <input type="text" name="apt_no" placeholder="Nr mieszkania" class="cart-input">
+                        </div>
+                        <div class="input-row" style="display: flex; gap: 10px;">
+                            <input type="text" name="zip" placeholder="Kod pocztowy" class="cart-input">
+                            <input type="text" name="city" placeholder="Miejscowość" class="cart-input">
+                        </div>
+                        <input type="tel" name="phone" placeholder="Telefon dla kuriera" class="cart-input">
+                    </div>
+                </form>
             </div>
 
             <div class="cart-summary">
@@ -580,11 +448,10 @@
 
 <script>
    // Upewnij się, że tablica ma poprawne nazwy plików!
-// Tablica ze zdjęciami bordowej ramki
+// Tablica ze zdjęciami brązowej ramki
 const galleryImages = [
-    "bordowafalbanka1.jpg", 
-    "bordowafalbanka2.jpg", 
-    "bordowafalbanka3.jpg"
+    "mokka_classy.jpg", 
+    "mokka_classy2.jpg"
 ];
 
 let currentModalIndex = 0;
@@ -659,8 +526,7 @@ function moveSlider(direction) {
     slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 </script>
-</script>
-    <script src="cart.js" defer></script>
+    <script src="cart.js"></script>
 
 <footer class="site-footer">
         <div class="footer-scallop"></div>
@@ -734,7 +600,6 @@ function moveSlider(direction) {
     </div>
     
     <button class="modal-arrow next" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.6); font-size: 35px; cursor: pointer; padding: 20px; z-index: 100015; transition: color 0.2s;" onclick="event.stopPropagation(); changeModalImg(1);" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">&#10095;</button>
-
 </div>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -748,21 +613,23 @@ function moveSlider(direction) {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  // Czysta inicjalizacja z obsługą responsywności
   const swiper = new Swiper('.mySwiper', {
     loop: true,
-    spaceBetween: 0, // Możesz dodać odstęp np. 10, jeśli chcesz
+    // Ustawiamy domyślnie 2 slajdy, aby wypełniły ekran po połowie
+    slidesPerView: 2, 
+    spaceBetween: 0,
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    // Konfiguracja responsywna
-    slidesPerView: 1, // Domyślnie 1 zdjęcie (dla mobile)
     breakpoints: {
-      // Gdy szerokość ekranu jest >= 768px (tablety i PC)
+      // Dla mniejszych ekranów (telefony) wracamy do 1 zdjęcia
+      320: {
+        slidesPerView: 1,
+      },
+      // Dla PC utrzymujemy 2 zdjęcia
       768: {
-        slidesPerView: 3,
-        spaceBetween: 0
+        slidesPerView: 2,
       }
     }
   });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-
+ 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,9 +68,9 @@
 <main class="content-wrapper">
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="bordowafalbanka1.jpg" onclick="openFullImg(0)"></div>
-            <div class="swiper-slide"><img src="bordowafalbanka2.jpg" onclick="openFullImg(1)"></div>
-            <div class="swiper-slide"><img src="bordowafalbanka3.jpg" onclick="openFullImg(2)"></div>
+            <div class="swiper-slide"><img src="podwojnazielen.JPG" onclick="openFullImg(0)"></div>
+            <div class="swiper-slide"><img src="podwojnazielen4.jpg" onclick="openFullImg(1)"></div>
+            <div class="swiper-slide"><img src="zielonapodwojna.jpg" onclick="openFullImg(2)"></div>
         </div>
         
         <!-- STRZAŁKI MUSZĄ BYĆ TUTAJ (wewnątrz .swiper) -->
@@ -81,31 +81,32 @@
     <!-- Poniżej sekcja informacji o produkcie -->
     <div class="product-main-info">
         <div class="title-price-row">
-            <h1 class="product-title">INSTAX MINI BORDOWA FALBANKA</h1>
+            <h1 class="product-title">INSTAX MINI PODWÓJNA ZIELEŃ</h1>
             <div class="product-color-selector">
         <span class="label">Wybierz kolor:</span>
         <div class="swatches">
-            <a href="bordowa_falbanka-details.html" class="swatch active" style="background-color: #592227;" title="Bordowy"></a>
-            <a href="brazowa_falbanka-details.html" class="swatch" style="background-color: #a99a8a;" title="Brązowy"></a>
+            <a href="podwojna_zielen-details.html" class="swatch active" style="background-color: #5f6f5a;" title="Zielony"></a>
+            <a href="podwojna_bordowa-details.html" class="swatch" style="background-color: #592227;" title="Bordowy"></a>
         </div>
     </div>
-            <span class="product-price">35,00 zł</span>
-            <button class="buy-button" id="buy-btn" onclick="addToCart('Bordowa Falbanka', 35, 'bordowafalbanka1.jpg')">
+            <span class="product-price">40,00 zł</span>
+            <button class="buy-button" id="buy-btn" onclick="addToCart('Zielona Podwójna', 40, 'podwojnazielen.jpg')">
                 DODAJ DO KOSZYKA
             </button>
         </div>
         
         <div class="product-description-full">
-        <h3>Wyrazisty Akcent w Twoim Domu</h3>
-        <p class="lead"><em>Zaproś do swojego wnętrza szlachetny odcień bordo, który w połączeniu z unikalnym kształtem „falbanki” tworzy oprawę pełną pasji i elegancji.</em></p>
+        <h3>Dwa wspomnienia, jedna opowieść</h3>
+        <p class="lead"><em>Czasem jedno zdjęcie to za mało, by oddać pełnię chwili.</em></p>
 
-        <p>Postaw na kolor, który rządzi wnętrzami. Głęboki, nasycony odcień bordo nadaje wnętrzu luksusowego charakteru, idealnie podkreślając barwy Twoich ulubionych fotografii. <strong>Bordowa Falbanka</strong> to nie tylko <strong>stylowa ramka na zdjęcia</strong>, ale małe dzieło sztuki, które przyciąga wzrok i ociepla domową galerię wspomnień.</p>
+        <p>Kolor, który wniesie do domu ukojenie, a nie tylko wypełni przestrzeń. Ten odcień zieleni jest jak spacer po lesie wczesnym rankiem, głęboki, szlachetny i niezwykle kojący. Wyobraź sobie tę ramkę na swojej komodzie, obok ulubionej książki. Pasuje wszędzie tam, gdzie cenisz sobie chwilę oddechu.</p>
         
-        <p>Model ten charakteryzuje się subtelnym, falowanym wykończeniem, które nadaje mu lekkości i unikalnego stylu. Niezależnie od tego, czy szukasz oprawy na <strong>zdjęcie Instax</strong>, czy chcesz zachować najważniejsze chwile jako <strong>pamiątka USG</strong>, bordowa falbanka sprawdzi się idealnie. <br><strong>Nasz autorski system slide-in</strong> pozwala na wymianę zdjęcia w sekundę – po prostu wsuwasz fotografię od góry w specjalną szczelinę, bez konieczności rozkładania ramki.</p>
+        <p>Głęboka zieleń to kolor, który wnosi do wnętrz balans, harmonię i nutę wyrafinowania. Nasza podwójna ramka to propozycja dla tych, którzy chcą stworzyć stylowy duet fotografii niezależnie od tego, czy to <strong>wakacyjne wspomnienia, portrety bliskich, czy pierwsze zdjęcia Twojego dziecka</strong>. Solidne wykonanie w połączeniu z estetyką "falbanki" sprawia, że ramka staje się dyskretną, ale zauważalną ozdobą każdej komody, biurka czy półki.</p>
+        <br><strong>Nasz autorski system slide-in</strong> pozwala na wymianę zdjęcia w sekundę - po prostu wsuwasz fotografię od góry w specjalną szczelinę, bez konieczności rozkładania ramki.</p>
             <div class="product-specs-card">
     <div class="spec-item"><strong>Materiał:</strong> Drewno ręcznie malowane</div>
-    <div class="spec-item"><strong>System:</strong> Slide-in (wsuwanie od góry)</div>
-    <div class="spec-item"><strong>Wymiary:</strong> 12,5 x 11 cm</div>
+    <div class="spec-item"><strong>System:</strong> Slide-in (wsuwanie od góry), ramka stojąca</div>
+    <div class="spec-item"><strong>Wymiary:</strong> 11.5 x 16 cm</div>
 </div>
         </div>
     </div>
@@ -184,22 +185,11 @@
     margin-top: 50px !important; 
     margin-bottom: 30px !important;
 }
-
-/* Przesunięcie pierwszego zdjęcia w kolumnie bocznej (to na górze) */
-.gallery-hero-grid-3 .side-photos-3 .side-photo-item-3:nth-child(1) img {
-    /* Zwiększaj wartość procentową (np. 40%, 50%), żeby zdjęcie szło w dół */
-    object-position: center 40% !important; 
-}
-.gallery-hero-grid-3 .side-photos-3 {
-    grid-template-rows: 1fr 1fr !important;
-    gap: 15px !important;
-}
-
 /* Korekta kadrowania dla trzeciego zdjęcia (nth-child(2) w kolumnie bocznej) */
 .gallery-hero-grid-3 .side-photos-3 .side-photo-item-3:nth-child(2) img {
     /* Zmień 'bottom' na wartość procentową. 
        Im wyższa wartość (np. 80%, 90%), tym bardziej zdjęcie pójdzie w dół. */
-    object-position: center 90% !important; 
+    object-position: center 100% !important; 
 }
 
     .product-description-full {
@@ -446,10 +436,15 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+.swiper-slide:nth-child(1) img {
+    /* 50% to środek poziomy, 20% to przesunięcie w pionie */
+    /* Zmieniaj wartość 20% na większą (np. 30%, 40%), aby przesuwać zdjęcie niżej */
+    object-position: 50% 20% !important; 
+}
 .swiper-slide:nth-child(3) img {
-    /* Pierwsza wartość to poziom (środek), druga to pion (przesunięcie w górę) */
-    /* 50% 50% to środek, więc zmniejszamy drugą wartość, aby zdjęcie poszło w górę */
-    object-position: 50% 100% !important; 
+    /* 50% to środek poziomy, 20% to przesunięcie w pionie */
+    /* Zmieniaj wartość 20% na większą (np. 30%, 40%), aby przesuwać zdjęcie niżej */
+    object-position: 50% 20% !important; 
 }
 </style>
 <section class="related-products">
@@ -582,9 +577,9 @@
    // Upewnij się, że tablica ma poprawne nazwy plików!
 // Tablica ze zdjęciami bordowej ramki
 const galleryImages = [
-    "bordowafalbanka1.jpg", 
-    "bordowafalbanka2.jpg", 
-    "bordowafalbanka3.jpg"
+    "podwojnazielen.jpg", 
+    "podwojnazielen4.jpg", 
+    "zielonapodwojna.jpg"
 ];
 
 let currentModalIndex = 0;
@@ -660,7 +655,7 @@ function moveSlider(direction) {
 }
 </script>
 </script>
-    <script src="cart.js" defer></script>
+    <script src="cart.js"></script>
 
 <footer class="site-footer">
         <div class="footer-scallop"></div>

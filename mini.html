@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kolekcja instax MINI | Ustalmy Grawer</title>
@@ -37,6 +38,67 @@
             margin-top: 40px;
         }
     }
+    .products-header {
+    display: flex;
+    justify-content: space-between; /* To rozsunie napis na lewo, a select na prawo */
+    align-items: center; /* Wyrówna je w pionie */
+    margin-top: 60px !important; /* Zmieniaj tę wartość (np. na 80px lub 100px), aby uzyskać idealny odstęp */
+    margin-bottom: 40px !important;
+    padding: 0 15px;
+}
+
+.sort-select {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    background: white;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Dostosowanie dla wersji mobilnej */
+@media (max-width: 768px) {
+    .products-header {
+        flex-direction: column; /* Utrzymujemy kolumnę */
+        gap: 20px; /* Zwiększamy odstęp między napisem a sorterem */
+        align-items: center; /* Centrujemy wszystko w poziomie */
+        margin-top: 100px !important; /* Dajemy więcej miejsca pod nawigacją */
+        margin-bottom: 40px !important;
+    }
+
+    .section-title {
+        margin-bottom: 0 !important; /* Zerujemy margines, bo 'gap' załatwia sprawę */
+        text-align: center;
+    }
+    
+    .sort-select {
+        width: 100%; /* Sorter zajmie całą szerokość, będzie wyglądał profesjonalnie */
+        max-width: 300px; /* Nie będzie zbyt rozciągnięty na bardzo dużych telefonach */
+    }
+}
+@media (min-width: 769px) {
+    .products-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 1200px !important; /* Szerokość twojego grida */
+        margin: 60px auto 40px auto !important;
+        padding: 0 !important;
+    }
+
+    .section-title {
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: left !important;
+        width: auto !important; /* Pozwala nagłówkowi być tak szerokim jak tekst */
+    }
+    
+    .sort-select {
+        margin: 0 !important;
+    }
+}
 </style>
 </head>
 <body>
@@ -73,6 +135,7 @@
             </a>
         </div>
     </li>
+
     <li class="cart-wrapper">
         <div class="cart-container" onclick="toggleCart()">
             <span class="cart-icon">
@@ -87,11 +150,19 @@
 </ul>
 </nav>
 <main class="content-wrapper">
-    <main class="products-section">
-        <h1 class="section-title">Ramki instax MINI</h1>
+    <div class="products-header">
+    <h1 class="section-title">Ramki instax MINI</h1>
+    
+    <select id="sort-products" onchange="sortProducts()" class="sort-select">
+    <option value="default">Sortuj według:</option>
+    <option value="price-low">Cena: od najniższej</option>
+    <option value="price-high">Cena: od najwyższej</option>
+    <option value="name">Nazwa: A-Z</option>
+</select>
+</div>
        <div class="product-grid">
     <!-- Produkt 1 -->
-    <div class="product-card">
+    <div class="product-card" data-popular="true" id="bordowa_falbanka-details">
     <a href="bordowa_falbanka-details.html" class="product-link">
         <div class="image-container">
             <span class="badge">Bestseller</span>
@@ -105,8 +176,8 @@
 </div>
             <!-- Tutaj możesz dodawać kolejne .product-card w przyszłości -->
              <!-- Produkt 2 -->
-<div class="product-card">
-    <a href="mokka-details.html" class="product-link">
+<div class="product-card" data-popular="false" id="mokka_classy-details">
+    <a href="mokka_classy-details.html" class="product-link">
         <div class="image-container">
             <img src="mokka_classy.jpg" alt="Instax Mini Mokka Classy">
         </div>
@@ -117,10 +188,10 @@
     </a>
 </div>
             <!-- Produkt 3 -->
-<div class="product-card">
+<div class="product-card" data-popular="false" id="jodełka-details">
     <a href="jodełka-details.html" class="product-link">
         <div class="image-container">
-            <img src="jodełka1.jpg" class="jodelka-fix" alt="Ramka Jodełka">
+            <img src="jodelka1.jpg" class="jodelka-fix" alt="Ramka Jodełka">
         </div>
         <div class="product-info">
             <h3 class="product-name">INSTAX MINI JODEŁKA</h3>
@@ -129,7 +200,7 @@
     </a>
 </div>
  <!-- Produkt 4 -->
-<div class="product-card">
+<div class="product-card" data-popular="false" id="brazowa_falbanka-details">
     <a href="brazowa_falbanka-details.html" class="product-link">
         <div class="image-container">
             <img src="brązowafalbanka1.jpg" alt="Instax Mini Brązowa Falbanka">
@@ -140,10 +211,103 @@
         </div>
     </a>
 </div>
+
+<!-- Produkt 5 -->
+<div class="product-card" data-popular="false" id="podwojna_zielen-details">
+    <a href="podwojna_zielen-details.html" class="product-link">
+        <div class="image-container">
+            <img src="zielonapodwojna.jpg" alt="Instax Mini Zielona Podwójna">
+        </div>
+        <div class="product-info">
+            <h3 class="product-name">INSTAX MINI ZIELONA PODWÓJNA</h3>
+            <p class="price">40,00 zł</p>
+        </div>
+    </a>
+</div>
+
+<!-- Produkt 6 -->
+<div class="product-card" data-popular="false" id="podwojna_bordowa-details">
+    <a href="podwojna_bordowa-details.html" class="product-link">
+        <div class="image-container">
+            <img src="podwojna_bordowa.jpg" alt="Instax Mini Bordowa Podwójna">
+        </div>
+        <div class="product-info">
+            <h3 class="product-name">INSTAX MINI BORDOWA PODWÓJNA</h3>
+            <p class="price">40,00 zł</p>
+        </div>
+    </a>
+</div>
         </div>
     </main>
+   
+    <footer class="site-footer">
+        <div class="footer-scallop"></div>
+    <div class="footer-container">
+        <div class="footer-brand">
+            <h2 class="footer-logo">USTALMY GRAWER</h2>
+            <p><a href="mailto:kontakt@ustalmygrawer.pl">ustalmygrawer@gmail.com</a></p>
+        </div>
+<div class="pc-only-socials">
+        <div class="social-icons-wrapper">
+                   <!-- Facebook -->
+    <a href="http://www.facebook.com/profile.php?id=61572027870815" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+        </svg>
+    </a>
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/ustalmygrawer/" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-miterlimit="10">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://www.tiktok.com/@ustalmygrawer" target="_blank" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+        </svg>
+    </a>
+            </div>
+        </div>
+         <div class="footer-column">
+    <h3>O NAS</h3>
+    <ul>
+        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="o-nas.html">O nas</a></li>
+        <li><a href="regulamin.html">Regulamin</a></li>
+        <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
+    </ul>
+</div>
 
-    <div id="cart-popup" class="popup-overlay" style="display: none;">
+<div class="footer-column">
+    <h3>OBSŁUGA KLIENTA</h3>
+    <ul>
+        <li><a href="dostawa.html">Metody i koszt dostawy</a></li>
+        <li><a href="zwroty.html">Zwroty i reklamacje</a></li>
+    </ul>
+</div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> Ustalmy Grawer. Wszelkie prawa zastrzeżone.</p>
+    </div>
+</footer>
+<script>
+        const galleryImages = ["bordowafalbanka1.jpg", "bordowafalbanka2.jpg", "bordowafalbanka3.jpg"];
+        function openFullImg(index) {
+    const modal = document.getElementById("imgModal");
+    const container = document.getElementById("imgContainer");
+    
+    if (modal && container) {
+        currentImgIndex = index;
+        container.src = galleryImages[index];
+        modal.style.display = "flex";
+    }
+}
+    </script>
+<div id="cart-popup" class="popup-overlay" style="display: none;">
     <div class="popup-content">
         <span class="close-popup" onclick="toggleCart()">&times;</span>
         
@@ -244,77 +408,6 @@
         </div>
     </div>
 </div>
-
-<script>
-        const galleryImages = ["bordowafalbanka1.jpg", "bordowafalbanka2.jpg", "bordowafalbanka3.jpg"];
-        function openFullImg(index) {
-    const modal = document.getElementById("imgModal");
-    const container = document.getElementById("imgContainer");
-    
-    if (modal && container) {
-        currentImgIndex = index;
-        container.src = galleryImages[index];
-        modal.style.display = "flex";
-    }
-}
-    </script>
-    <script src="cart.js"></script>
-    </main>
-<footer class="site-footer">
-        <div class="footer-scallop"></div>
-    <div class="footer-container">
-        <div class="footer-brand">
-            <h2 class="footer-logo">USTALMY GRAWER</h2>
-            <p><a href="mailto:kontakt@ustalmygrawer.pl">ustalmygrawer@gmail.com</a></p>
-        </div>
-<div class="pc-only-socials">
-        <div class="social-icons-wrapper">
-                   <!-- Facebook -->
-    <a href="http://www.facebook.com/profile.php?id=61572027870815" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-        </svg>
-    </a>
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/ustalmygrawer/" target="_blank" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-miterlimit="10">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-    </a>
-    <!-- TikTok -->
-    <a href="https://www.tiktok.com/@ustalmygrawer" target="_blank" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-        </svg>
-    </a>
-            </div>
-        </div>
-         <div class="footer-column">
-    <h3>O NAS</h3>
-    <ul>
-        <li><a href="kontakt.html">Kontakt</a></li>
-        <li><a href="o-nas.html">O nas</a></li>
-        <li><a href="regulamin.html">Regulamin</a></li>
-        <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
-    </ul>
-</div>
-
-<div class="footer-column">
-    <h3>OBSŁUGA KLIENTA</h3>
-    <ul>
-        <li><a href="dostawa.html">Metody i koszt dostawy</a></li>
-        <li><a href="zwroty.html">Zwroty i reklamacje</a></li>
-    </ul>
-</div>
-    </div>
-
-    <div class="footer-bottom">
-        <p>&copy; <span id="current-year"></span> Ustalmy Grawer. Wszelkie prawa zastrzeżone.</p>
-        <p class="author">Realizacja własna.</p>
-    </div>
-</footer>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({
@@ -325,5 +418,35 @@
     easing: 'ease-in-out',
   });
 </script>
+<script>
+function sortProducts() {
+    const select = document.getElementById("sort-products");
+    const grid = document.querySelector(".product-grid");
+    let cards = Array.from(grid.querySelectorAll(".product-card"));
+    const value = select.value;
+
+    if (value === "default") {
+        location.reload(); // Najpewniejszy sposób na powrót do Twojego układu
+        return;
+    }
+
+    cards.sort((a, b) => {
+        if (value === "price-low" || value === "price-high") {
+            const priceA = parseFloat(a.querySelector(".price").innerText.replace(',', '.'));
+            const priceB = parseFloat(b.querySelector(".price").innerText.replace(',', '.'));
+            return value === "price-low" ? priceA - priceB : priceB - priceA;
+        } 
+        else if (value === "name") {
+            const nameA = a.querySelector(".product-name").innerText;
+            const nameB = b.querySelector(".product-name").innerText;
+            return nameA.localeCompare(nameB);
+        }
+        return 0;
+    });
+
+    cards.forEach(card => grid.appendChild(card));
+}
+</script>
+    <script src="cart.js"></script>
 </body>
 </html>

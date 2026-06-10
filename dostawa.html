@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dostawa i Płatności - Ustalmy Grawer</title>
@@ -179,7 +180,7 @@
     </div>
 </div>
 
-<script src="cart.js"></script>
+
     </header>
     <div id="cart-popup" class="popup-overlay" style="display: none;">
     <div class="popup-content">
@@ -194,51 +195,48 @@
                 <p class="section-label">DANE DO WYSYŁKI:</p>
                 
                 <form id="checkout-form">
-                    <input type="hidden" name="_next" value="https://ustalmygrawer.github.io/ustalmygrawer/dziekujemy.html">                
-                    <input type="hidden" name="Produkty" id="form-products">
-                    <input type="hidden" name="Suma_Calkowita" id="form-total">
-                    <input type="hidden" name="Zastosowany_Rabat" id="form-discount">
-                    
-                    <input type="text" name="name" placeholder="Imię i Nazwisko" required class="cart-input">
-                    <input type="email" name="email" placeholder="E-mail" required class="cart-input">
-                    
-                    <div id="paczkomat-box" class="sub-box">
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
-        <label>NUMER PACZKOMATU: *</label>
-        
-        <div class="tooltip-container">
-            <span class="info-icon">?</span>
-            <div class="tooltip-content">
-                <p>Znajdź paczkomat na mapie i wpisz jego kod (np. <b>KRA01M</b>) w pole poniżej.</p>
-                <img src="instrukcja-paczkomat.jpg" alt="Jak znaleźć kod" style="width:100%; border-radius:4px; margin-top:5px;">
+    <input type="hidden" name="_next" value="https://ustalmygrawer.github.io/ustalmygrawer/dziekujemy.html">                
+    <input type="hidden" name="Produkty" id="form-products">
+    <input type="hidden" name="Suma_Calkowita" id="form-total">
+    <input type="hidden" name="Zastosowany_Rabat" id="form-discount">
+    
+    <input type="text" name="name" placeholder="Imię i Nazwisko" required class="cart-input">
+    <input type="email" name="email" placeholder="E-mail" required class="cart-input">
+    
+    <div id="paczkomat-box" class="sub-box">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
+            <label>NUMER PACZKOMATU: *</label>
+            <div class="tooltip-container">
+                <span class="info-icon">?</span>
+                <div class="tooltip-content">
+                    <p>Znajdź paczkomat na mapie i wpisz jego kod (np. <b>KRA01M</b>) w pole poniżej.</p>
+                </div>
             </div>
         </div>
+
+        <input type="text" id="paczkomat-search" name="Nr_Paczkomatu" placeholder="Wklej kod paczkomatu Np. KRA01M" class="cart-input" required>
+        
+        <a href="https://inpost.pl/znajdz-paczkomat" target="_blank" class="inpost-map-btn" style="display: block; text-align: center; line-height: 1.0; padding: 10px 5px;">
+            WYSZUKAJ KOD PACZKOMATU
+        </a>
+
+        <label style="display:block; margin-top:10px; font-size:12px;">NUMER TELEFONU: *</label>
+        <input type="tel" id="paczkomat-phone" name="Telefon_Paczkomat" placeholder="Dla powiadomień InPost" class="cart-input" required>
     </div>
 
-    <input type="text" id="paczkomat-search" name="Nr_Paczkomatu" placeholder="Wklej kod paczkomatu Np. KRA01M" class="cart-input" required>
-    
-    <a href="https://inpost.pl/znajdz-paczkomat" target="_blank" class="inpost-map-btn" 
-   style="display: block; text-align: center; line-height: 1.0; padding: 10px 5px;">
-    WYSZUKAJ KOD PACZKOMATU<br>
-</a>
-
-    <label style="display:block; margin-top:10px; font-size:12px;">NUMER TELEFONU:</label>
-    <input type="tel" id="paczkomat-phone" name="Telefon_Paczkomat" placeholder="Dla powiadomień InPost" class="cart-input">
-</div>
-
-                    <div id="address-box" class="sub-box" style="display: none;"> 
-                        <input type="text" name="street" placeholder="Ulica" class="cart-input">
-                        <div class="input-row" style="display: flex; gap: 10px;">
-                            <input type="text" name="house_no" placeholder="Nr domu" class="cart-input">
-                            <input type="text" name="apt_no" placeholder="Nr mieszkania" class="cart-input">
-                        </div>
-                        <div class="input-row" style="display: flex; gap: 10px;">
-                            <input type="text" name="zip" placeholder="Kod pocztowy" class="cart-input">
-                            <input type="text" name="city" placeholder="Miejscowość" class="cart-input">
-                        </div>
-                        <input type="tel" name="phone" placeholder="Telefon dla kuriera" class="cart-input">
-                    </div>
-                </form>
+    <div id="address-box" class="sub-box" style="display: none;"> 
+        <input type="text" name="street" placeholder="Ulica" class="cart-input">
+        <div class="input-row" style="display: flex; gap: 10px;">
+            <input type="text" name="house_no" placeholder="Nr domu" class="cart-input">
+            <input type="text" name="apt_no" placeholder="Nr mieszkania" class="cart-input">
+        </div>
+        <div class="input-row" style="display: flex; gap: 10px;">
+            <input type="text" name="zip" placeholder="Kod pocztowy" class="cart-input">
+            <input type="text" name="city" placeholder="Miejscowość" class="cart-input">
+        </div>
+        <input type="tel" id="phone" name="phone" placeholder="Telefon dla kuriera" class="cart-input" required>
+    </div>
+</form>
             </div>
 
             <div class="cart-summary">
@@ -282,7 +280,6 @@
         </div>
     </div>
 </div>
-    <script src="cart.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({
@@ -293,5 +290,6 @@
     easing: 'ease-in-out',
   });
 </script>
+<script src="cart.js"></script>
 </body>
 </html>

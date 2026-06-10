@@ -1,5 +1,6 @@
 <html lang="pl">
 <head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt - Ustalmy Grawer</title>
@@ -59,37 +60,35 @@
 <section class="contact-page">
     <div class="contact-header-container">
         <div class="contact-image">
-            <img src="bordowafalbanka1.jpg" alt="Ustalmy Grawer">
+            <img src="bordowafalbanka1.jpg" alt="Ustalmy Grawer" style="height: 100%; object-fit: cover; border-radius: 30px;">
         </div>
 
         <div class="contact-info">
             <h2>KONTAKT</h2>
-            <ul class="product-specs"></ul>
             <p class="contact-intro">Bardzo zależy nam na dobrej relacji z Wami i satysfakcji z zakupu, dlatego z chęcią odpowiemy na Twoje pytania!</p>
             
             <div class="contact-form-sidebar">
                 <h3>NAPISZ DO NAS</h3>
-                <form action="https://formspree.io/f/mbdwqwne" method="POST" id="contact-form">
-                    <input type="hidden" name="_next" value="https://ustalmygrawer.github.io/ustalmygrawer/dziekujemyzawiadomosc.html">
+                <form id="contact-form">
+                    <input type="text" name="name" placeholder="Imię i nazwisko*" required>
                     
-                    <div class="form-group">
-                        <label>Twoje Imię</label>
-                        <input type="text" name="name" required>
+                    <div class="row">
+                        <input type="email" name="email" placeholder="E-mail*" required>
+                        <input type="tel" name="Telefon" placeholder="Numer telefonu*" required>
                     </div>
-                    <div class="form-group">
-                        <label>Adres E-mail</label>
-                        <input type="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Wiadomość</label>
-                        <textarea name="message" rows="4" placeholder="W czym mogę Ci pomóc?" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">WYŚLIJ</button>
+
+                    <textarea name="Produkty" placeholder="W czym mogę Ci pomóc?*" required></textarea>
+
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="privacy" required>
+                        <span>Oświadczam, że zapoznałem/am się z treścią <a href="polityka-prywatnosci.html" target="_blank">Polityki Prywatności</a> i akceptuję jej zapisy. Rozumiem, że akceptacja zgody jest konieczna do uzyskania odpowiedzi na przesłane pytanie.</span>
+                    </label>
+
+                    <button type="submit">Wyślij wiadomość</button>
                 </form>
             </div>
         </div>
     </div>
-
     <div class="company-footer-details">
         <p><strong>USTALMY Anna Kozłowska</strong></p>
         <p>NIP: 8331407478 | REGON: 526644405</p>
@@ -211,6 +210,35 @@
     delay: 100,        // Małe opóźnienie, żeby wyglądało naturalniej
     easing: 'ease-in-out',
   });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = form.querySelector('button');
+        btn.disabled = true;
+        btn.innerText = "Wysyłanie...";
+
+        fetch('https://script.google.com/macros/s/AKfycbxibhUXFkgXS-37b-1oFfAXZ-vFSz5JI1DL-p_BuexNgKI-qntc5NUZEZWyLBw-yjagBg/exec', {
+            method: 'POST',
+            body: new FormData(form),
+            mode: 'no-cors'
+        })
+        .then(() => {
+            // Po wysłaniu przechodzi na stronę podziękowań
+            window.location.href = 'dziekujemyzawiadomosc.html';
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Błąd wysyłania. Sprawdź połączenie z internetem.");
+            btn.disabled = false;
+            btn.innerText = "Wyślij wiadomość";
+        });
+    });
+});
 </script>
 </body>
 </html>

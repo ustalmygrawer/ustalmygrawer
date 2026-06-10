@@ -662,7 +662,7 @@ button {
         height: 100vh !important;     
         background-color: rgba(0, 0, 0, 0.6) !important;
         /* USUNĘLIŚMY stąd display: flex !important */
-        z-index: 9999 !important;
+        z-index: 9999999 !important;
         padding: 10px !important;     
         box-sizing: border-box !important;
     }
@@ -1352,11 +1352,9 @@ html, body {
 /* Ustawienie kontenera, by zdjęcie i info startowały od samej góry */
 .contact-header-container {
     display: flex;
-    align-items: flex-start; /* Ważne: tekst wyrówna się do góry zdjęcia */
-    gap: 50px;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    gap: 30px; /* Odstęp między zdjęciem a formularzem */
+    align-items: stretch; /* To sprawia, że obie strony mają tę samą wysokość */
+    padding: 60px 5%;
 }
 
 /* Zdjęcie po lewej */
@@ -1377,23 +1375,115 @@ html, body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    background-color: #e7e4d5;
+    padding: 40px;
+    border-radius: 30px;
 }
 
 .contact-info h2 {
     margin-top: 0; /* Podciąga napis KONTAKT do samej góry */
     font-size: 32px;
 }
+.contact-intro { font-size: 1.3rem; margin-bottom: 20px; }
 
-.contact-form-sidebar {
-    margin-top: 30px;
-    padding-top: 30px;
-    border-top: 1px solid #eee; /* Delikatna linia oddzielająca dane od formularza */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Mniejsze przerwy między polami */
 }
 
-.contact-form-sidebar h3 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    text-align: left;
+/* Pola wejściowe */
+#contact-form input, 
+#contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 15px; /* Opływowe pola */
+    background: white;
+    font-family: inherit;
+    box-sizing: border-box; /* Ważne, żeby pola nie wystawały poza kontener */
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+}
+
+.row input { flex: 1; }
+
+#contact-form textarea { height: 100px; resize: none; }
+
+/* Checkbox */
+/* Wymuszamy układ poziomy dla całego kontenera checkboxa */
+/* Kontener checkboxa - naprawa układu */
+.checkbox-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    font-size: 0.8rem !important;
+    color: #4a3728 !important;
+    text-align: left !important;
+    margin-top: 15px !important;
+    width: 100% !important;
+}
+
+/* Wymuszenie, by tekst i link były w jednym bloku */
+.checkbox-container span, .checkbox-container a {
+    display: inline !important; /* To zapobiega łamaniu wiersza */
+    line-height: 1.4 !important;
+}
+
+/* Wygląd linku - bez niepotrzebnych przerw */
+.checkbox-container a {
+    color: #899482 !important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+    margin: 0 3px !important; /* Delikatny odstęp wokół słowa */
+}
+
+/* Upewnienie się, że kwadracik jest stały */
+.checkbox-container input[type="checkbox"] {
+    flex-shrink: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin-top: 2px !important;
+}
+
+/* Przycisk wysyłania (w kolorze tła zgodnie z prośbą) */
+#contact-form button {
+    background-color: #e7e4d5;
+    color: #4a3728;
+    border: 1px solid #4a3728;
+    padding: 15px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#contact-form button:hover {
+    background-color: #4a3728;
+    color: #e7e4d5;
+}
+
+/* --- STOPKA --- */
+.company-footer-details {
+    text-align: center;
+    padding: 40px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* --- RESPONSYWNOŚĆ --- */
+@media (max-width: 768px) {
+    .contact-header-container {
+        flex-direction: column; /* Na telefonie wszystko jeden pod drugim */
+    }
+    .row {
+        flex-direction: column; /* Pola w wierszu też jeden pod drugim */
+    }
 }
 
 /* Stylizacja pól formularza, by były zgrabniejsze */
@@ -2206,10 +2296,13 @@ html, body {
 }
 
 .main-desc {
-    font-size: 1.1rem;
-    color: #666;
+    font-size: 1.25rem; /* Nieco większy niż reszta tekstu */
+    font-style: italic;
+    color: #5a1827;
+    line-height: 1.4;
     margin-bottom: 40px;
     max-width: 500px;
+    
 }
 
 /* Stylizacja kroków 01, 02, 03 */
@@ -2266,11 +2359,11 @@ html, body {
 }
 
 .mini-footer-note {
-    width: 100%;
-    text-align: left;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
+     font-size: 1.25rem; /* Nieco większy niż reszta tekstu */
+    font-style: italic;
+    color: #5a1827;
+    margin-bottom: 2rem;
+    line-height: 1.4;
 }
 .video-side {
     flex: 0 0 350px; /* Zwiększamy z 250px na 350px */
@@ -2704,37 +2797,70 @@ html, body {
     text-decoration: underline; /* Opcjonalnie: podkreślenie, żeby było wyraźniejsze */
     color: #1a1a1a; /* Możesz też zmienić kolor na nieco ciemniejszy */
 }
+
 /* Galeria PC - Czysty układ */
 /* GŁÓWNY KONTENER GALERII (Dla komputerów PC) */
+/* 1. ZAWSZE RÓWNE ZDJĘCIA */
+/* Kontener galerii - teraz zachowuje się jak slider */
+.product-gallery-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Odcina zdjęcia wychodzące poza ekran */
+}
 .product-gallery-grid {
     display: flex !important;
-    flex-direction: row !important;
-    gap: 20px !important;            /* Elegancki odstęp między dwoma dużymi zdjęciami */
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
+    gap: 15px;
+    width: 100%;
+    transition: transform 0.5s ease;
+}
+.product-gallery-grid img {
+    cursor: pointer !important; /* Wymuszenie łapki po najechaniu */
+    transition: transform 0.3s ease;
+}
+.product-gallery-grid::-webkit-scrollbar {
+    display: none;            /* Ukrywa pasek przewijania w Chrome/Safari */
 }
 
-/* Pierwsze (główne) i drugie (boczne) zdjęcie dostają dokładnie po 50% szerokości */
-.product-gallery-grid .main-photo,
-.product-gallery-grid .side-photo-item {
-    flex: 1 1 50% !important;        /* Każde zdjęcie zajmuje równo połowę szerokości */
-    width: 50% !important;
-    max-width: 50% !important;
-    height: 600px !important;        /* Stała, elegancka wysokość na PC - możesz ją dostosować */
-    overflow: hidden !important;
-    box-sizing: border-box !important;
+/* Każde zdjęcie zajmuje dokładnie 1/3 szerokości */
+.main-photo, .side-photo-item {
+    flex: 1 1 300px; /* Rozciągają się, ale nie mniej niż 300px */
+    max-width: 540px; /* Maksymalna szerokość zdjęcia */
+    height: 540px;
+    overflow: hidden;
 }
 
-/* Same obrazki wewnątrz kontenerów */
-.product-gallery-grid .main-photo img,
-.product-gallery-grid .side-photo-item img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;    /* Wypełnia całą przestrzeń 50/50, bez zniekształceń */
-    display: block !important;
-    transition: transform 0.3s ease !important;
+.main-photo img, .side-photo-item img {
+    width: 100%; height: 100%; object-fit: cover;
 }
+.slider-active .product-gallery-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+/* 2. UKRYWANIE STRZAŁEK, JEŚLI ICH NIE POTRZEBUJESZ */
+/* Jeśli chcesz, żeby były widoczne tylko przy dużej ilości zdjęć, 
+   musimy użyć prostego media query lub po prostu zostawić je jako stały element */
+.slider-controls-overlay {
+    position: absolute !important;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex !important;
+    justify-content: space-between;
+    pointer-events: none; /* Klikasz "przez" strzałki w zdjęcia */
+    z-index: 20000 !important; /* Musi być wyższe niż Twoje pancerne 10000 */
+}
+
+.slider-arrow {
+    pointer-events: auto !important; /* Przyciski są aktywne */
+    background: red !important;
+    color: white !important;
+    border: none !important;
+    padding: 15px 20px !important;
+    cursor: pointer !important;
+    z-index: 20001 !important;
+}
+
 @media (max-width: 768px) {
     .product-gallery-wrapper {
         position: relative !important;
@@ -3441,4 +3567,170 @@ html, body {
 main, .hero, section {
     position: relative;
     z-index: 1; /* Treść strony zostaje na dole, dzięki czemu gładko chowa się pod warstwę nav */
+}
+
+@media (max-width: 768px) {
+    /* Upewniamy się, że kontenery zdjęć mają stałą proporcję, np. kwadrat */
+    .product-gallery-grid .main-photo, 
+    .product-gallery-grid .side-photo-item {
+        width: 100% !important;
+        aspect-ratio: 1 / 1; /* Wymusza kwadratowy kształt ramki na mobile */
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    /* Zdjęcie wypełnia ramkę, nie rozciągając się */
+    .product-gallery-grid img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important; /* TO JEST KLUCZ: obcina nadmiar, nie zniekształca */
+        object-position: center !important; /* Centruje najważniejszy punkt zdjęcia */
+        border-radius: 8px;
+    }
+    
+}
+/* Kontener główny - szerokość jak na stronie Loreve */
+/* Kontener nadrzędny - ogranicza całą galerię */
+.product-gallery-wrapper {
+    width: 100%;
+    max-width: 600px; /* Zmień tę wartość, jeśli chcesz szerszą galerię */
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* Wymuszenie na obrazkach, aby zawsze mieściły się w slajdzie */
+/* 1. Całkowite zerowanie przerw */
+.swiper-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: stretch !important;
+}
+
+/* 2. Zdjęcia bez zaokrągleń i przerw */
+.swiper-slide img {
+    width: 100% !important;
+    height: 500px !important; /* Zwiększ tę liczbę, aby zdjęcie było wyższe */
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    object-fit: cover; /* Zdjęcie wypełni cały obszar bez rozciągania */
+}
+
+/* 3. Opcjonalnie: Jeśli chcesz, aby slider zajmował pełną szerokość ekranu, 
+   usuń 'max-width' z kontenera .swiper */
+.swiper {
+    width: 100% !important;
+    max-width: none !important; /* Slider na całą szerokość strony */
+    margin: 0 auto;
+}
+.swiper-slide {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.swiper-button-next, 
+.swiper-button-prev {
+    background-color: rgba(255, 255, 255, 0.8) !important; /* Półprzezroczyste białe tło */
+    color: #000 !important;
+    width: 50px !important;       /* Szerokość */
+    height: 50px !important;      /* Wysokość musi być taka sama jak szerokość */
+    border-radius: 50% !important; /* To tworzy idealne koło */
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    transition: all 0.3s ease !important;
+    border: 1px solid rgba(0,0,0,0.1) !important; /* Opcjonalna delikatna obwódka */
+}
+
+/* Usuwamy standardowe kwadratowe dopełnienie (padding) */
+.swiper-button-next::after, 
+.swiper-button-prev::after {
+    font-size: 18px !important; /* Rozmiar samej strzałki */
+    font-weight: bold !important;
+}
+
+/* Efekt po najechaniu myszką */
+.swiper-button-next:hover, 
+.swiper-button-prev:hover {
+    background-color: rgba(255, 255, 255, 1) !important; /* Pełne białe tło */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important; /* Delikatny cień */
+}
+
+@media (min-width: 768px) {
+    .product-gallery-wrapper {
+        max-width: 500px; /* Możesz zmniejszyć tę wartość, żeby zdjęcia były mniejsze */
+    }
+}
+/* Wymuszenie klikalności strzałek na telefonie */
+.swiper-button-prev, .swiper-button-next {
+    pointer-events: auto !important;
+    z-index: 9999 !important;
+}
+
+/* Upewnij się, że główny kontener nie blokuje dotyku */
+.swiper-wrapper {
+    touch-action: pan-y !important;
+}
+.swiper-slide img[src="jodelka3(2).jpg"] {
+    object-position: 25% 50% !important;
+}
+/* Zabezpieczenie dla kafelka z Jodełką */
+a[href="jodełka-details.html"].product-card {
+    width: 375px !important;
+    min-width: 375px !important;
+    display: inline-block;
+    vertical-align: top;
+}
+
+a[href="jodełka-details.html"].product-card img {
+    width: 375px !important;
+    height: 375px !important;
+    object-fit: cover !important;
+    display: block;
+}
+/* Ukrycie strzałek, gdy są nieaktywne */
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+    opacity: 0 !important;      /* Całkowite ukrycie */
+    cursor: default !important; /* Blokada kliknięcia */
+    pointer-events: none !important; /* Kliknięcia przechodzą "przez" strzałkę */
+}
+
+/* Opcjonalnie: łagodne znikanie */
+.swiper-button-next, .swiper-button-prev {
+    transition: opacity 0.3s ease !important;
+}
+
+/* Izolujemy tylko slider - reszta strony pozostaje nietknięta */
+.mySwiper .swiper-slide img {
+    width: 100%;
+    height: 300px;         /* Ustal stałą wysokość tutaj - wszystkie będą równe */
+    object-fit: cover;     /* Zdjęcie wypełni obszar bez rozciągania */
+    display: block;
+}
+.mySwiper {
+    overflow: hidden !important; 
+    max-width: 100% !important;
+}
+/* Celujemy dokładnie w przyciski nawigacyjne wewnątrz modala */
+.modal .prev-btn, 
+.modal .next-btn,
+.modal button[onclick*="changeModalImg"] { 
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 999999 !important; /* Musi być wyższy niż cokolwiek innego */
+    cursor: pointer !important;
+    background: rgba(0, 0, 0, 0.3) !important; /* Tło, żeby były widoczne na zdjęciu */
+    border-radius: 50% !important;
+    padding: 15px !important;
+}
+
+/* Odsunięcie od krawędzi */
+.modal button[onclick*="changeModalImg"]:first-of-type {
+    left: 20px !important; /* Lewa strzałka */
+}
+
+.modal button[onclick*="changeModalImg"]:last-of-type {
+    right: 20px !important; /* Prawa strzałka */
 }

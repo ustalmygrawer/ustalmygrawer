@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+  
+     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Drewniana Ramka Falbanka na Zdjęcia Instax Mini | Brazowa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <title>Drewniana klasyczna ramka na Zdjęcia Instax Mini | Mokka</title>
     
     <meta name="description" content="Wyjątkowa, drewniana ramka z falbanką na zdjęcia z aparatu Instax Mini. Kolor brazowy, idealna na prezent. Sprawdź opcję z personalizowanym grawerem!">
    
     
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -62,20 +66,15 @@
 </ul>
 </nav>
 <main class="content-wrapper">
-    <div class="product-gallery-wrapper">
-        <div class="product-gallery-grid mobile-swipe" id="productSlider">
-            <div class="main-photo">
-                <img src="brązowafalbanka1.jpg" class="zoomable" onclick="openFullImg(0)">
-            </div>
-            <div class="side-photo-item">
-                <img src="brązowafalbanka2.jpg" class="zoomable" onclick="openFullImg(1)">
-            </div>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="brązowafalbanka1.jpg" onclick="openFullImg(0)"></div>
+            <div class="swiper-slide"><img src="brązowafalbanka2.jpg" onclick="openFullImg(1)"></div>
         </div>
-
-        <div class="slider-controls-overlay">
-            <button id="prevArrow" class="slider-arrow" onclick="moveSlider(-1)">&#10094;</button>
-            <button id="nextArrow" class="slider-arrow" onclick="moveSlider(1)">&#10095;</button>
-        </div>
+        
+        <!-- STRZAŁKI MUSZĄ BYĆ TUTAJ (wewnątrz .swiper) -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 
 
@@ -83,20 +82,31 @@
     <div class="product-main-info">
         <div class="title-price-row">
             <h1 class="product-title">INSTAX MINI BRĄZOWA FALBANKA</h1>
+            <div class="product-color-selector">
+        <span class="label">Wybierz kolor:</span>
+        <div class="swatches">
+            <a href="bordowa_falbanka-details.html" class="swatch" style="background-color: #592227;" title="Bordowy"></a>
+            <a href="brazowa_falbanka-details.html" class="swatch active" style="background-color: #a99a8a;" title="Brązowy"></a>
+        </div>
+    </div>
             <span class="product-price">35,00 zł</span>
-            <button class="buy-button" onclick="addToCart('Brązowa Falbanka', 35, 'brązowafalbanka1.jpg')">
+            <button class="buy-button" id="buy-btn" onclick="addToCart('Brązowa Falbanka', 35, 'brązowafalbanka1.jpg')">
                 DODAJ DO KOSZYKA
             </button>
         </div>
         
         <div class="product-description-full">
-            <p>Drewniana ramka stojąca z motywem falbanki to połączenie nowoczesnego rzemiosła z miłością do fotografii natychmiastowej. Stylowa, trwała i niesamowicie łatwa w obsłudze. 
-            Zapomnij o rozkręcaniu plecków czy skomplikowanych zaczepach – tutaj wystarczy wsunąć zdjęcie od góry w specjalną szczelinę. Jeden ruch i gotowe! Twoja nowa historia już zdobi biurko.</p>
-            <ul class="product-specs">
-                <li>Materiał: drewno, ręcznie malowane.</li>
-                <li>System: slide-in. Zdjęcie wsuwane jednym ruchem od góry.</li>
-                <li>Wymiary: 12.5 x 11 cm.</li>
-            </ul>
+        <h3>Ciepło naturalnego drewna</h3>
+        <p class="lead"><em>Odkryj piękno płynące z prostoty. Brązowa Falbanka to hołd dla tradycyjnego rzemiosła, który nadaje Twoim zdjęciom przytulny, domowy charakter.</em></p>
+
+        <p>Szukasz oprawy, która wniesie do Twojego wnętrza spokój i harmonię? Nasza ramka <strong>Brązowa Falbanka</strong>> powstała z miłości do naturalnych materiałów. Jej głęboki, ziemisty odcień drewna wspaniale wydobywa to, co najpiękniejsze z <strong>odbitki Instax</strong>, czyniąc ją idealnym towarzyszem codziennych chwil zapisanych w kadrze. To więcej niż dekoracja, <strong>to sposób na wprowadzenie do domu odrobiny kojącej natury</strong>.</p>
+        
+        <p>Ramka zachwyca swoją lekkością i unikalnym, rzeźbionym kształtem. Dzięki naszemu sprawdzonemu systemowi <strong>slide-in</strong>, umieszczenie w niej zdjęcia trwa dosłownie <strong>sekundę!</strong> Po prostu wsuwasz fotografię w specjalną szczelinę, bez konieczności rozkładania ramki. <br>To doskonały wybór dla osób, które cenią trwałość i ponadczasowe wzornictwo.</p>
+            <div class="product-specs-card">
+    <div class="spec-item"><strong>Materiał:</strong> Drewno ręcznie malowane</div>
+    <div class="spec-item"><strong>System:</strong> Slide-in (wsuwanie od góry)</div>
+    <div class="spec-item"><strong>Wymiary:</strong> 12,5 x 11 cm</div>
+</div>
         </div>
     </div>
     <div class="safety-info-container" data-aos="fade-up">
@@ -120,61 +130,172 @@
 </div>
 
 <style>
-    .safety-info-container {
-        margin-top: 40px;
-        padding: 25px;
-        background-color: #fdfaf7; /* Delikatny beż pasujący do strony */
-        border: 1px solid #efe3d5;
-        border-radius: 2px;
-        font-family: 'Montserrat', sans-serif;
-    }
+   /* GŁÓWNY KONTENER */
+.gallery-hero-grid-3 {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important; /* Lewa strona 2x większa niż prawa */
+    gap: 15px !important;
+    width: 100% !important;
+}
 
-    .safety-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-        border-bottom: 1px solid #efe3d5;
-        padding-bottom: 10px;
-    }
+/* DUŻE ZDJĘCIE */
+.hero-photo-3 {
+    height: 500px !important;
+    overflow: hidden !important;
+}
 
-    .safety-header h3 {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-        margin: 0;
-        color: #1a1a1a;
-        text-transform: uppercase;
-    }
+.hero-photo-3 img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 15px !important;
+    cursor: pointer !important;
+    transition: transform 0.4s ease !important;
+}
 
-    .safety-content p {
-        font-size: 0.85rem;
-        line-height: 1.6;
-        color: #555;
-        margin-bottom: 15px;
-    }
+/* KOLUMNA Z MAŁYMI ZDJĘCIAMI */
+.side-photos-3 {
+    display: grid !important;
+    grid-template-rows: 1fr 1fr !important; /* Dwa równe rzędy */
+    gap: 15px !important;
+}
 
-    .safety-content ul {
-        margin: 0;
-        padding-left: 18px;
-        list-style-type: none;
-    }
+.side-photo-item-3 {
+    height: 242px !important;
+    overflow: hidden !important;
+}
 
-    .safety-content li {
-        font-size: 0.8rem;
-        line-height: 1.5;
-        color: #666;
-        margin-bottom: 10px;
-        position: relative;
-    }
+.side-photo-item-3 img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 15px !important;
+    cursor: pointer !important;
+    transition: transform 0.4s ease !important;
+}
 
-    .safety-content li::before {
-        content: "•";
-        color: #d1bfa7;
-        font-weight: bold;
-        display: inline-block; 
-        width: 1em;
-        margin-left: -1em;
-    }
+/* EFEKT POWIĘKSZENIA */
+.gallery-hero-grid-3 img:hover {
+    transform: scale(1.05) !important;
+}
+.product-gallery-wrapper {
+    width: 100% !important;
+    /* To jest kluczowa linijka, która robi odstęp od falbanki */
+    margin-top: 50px !important; 
+    margin-bottom: 30px !important;
+}
+
+      .product-description-full {
+    margin: 40px 0;
+    line-height: 1.8;
+    color: #333;
+}
+.product-description-full p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.8;
+    color: #444; /* Zmiana z #333 na #444 - delikatnie łagodniejsza czerń dla oczu */
+    margin-bottom: 1.5rem; /* Dodanie odstępu między akapitami - klucz do elegancji! */
+}
+
+.product-description-full h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.1rem; /* Lekko zmniejszony rozmiar - mniejsze nagłówki wyglądają bardziej luksusowo */
+    color: #5a1827;    /* Dodaj kolor, żeby nagłówek "siedział" w bordowej palecie marki */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.product-description-full .lead {
+    font-size: 1.25rem; /* Nieco większy niż reszta tekstu */
+    font-style: italic;
+    color: #5a1827;
+    margin-bottom: 2rem;
+    line-height: 1.4; /* Mniejsza wysokość linii dla akapitu "lead" wygląda lepiej w kursywie */
+}
+.product-specs-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+    background: #fff; /* Czyste tło */
+    border: 1px solid #e0dcd5; /* Bardzo delikatna ramka w kolorze kawowym */
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.spec-item {
+    flex: 1 1 200px; /* Automatycznie dzieli na kolumny */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.spec-item strong {
+    color: #5a1827;           /* Twój bordowy kolor */
+    display: block;           /* Nazwa nad wartością */
+    text-transform: uppercase;
+    font-size: 1rem;        /* Nieco większa czcionka dla nazw */
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    font-weight: 800;         /* ZMIANA: Zwiększamy z 600 na 800 (Extra Bold) */
+}
+   .safety-info-container {
+    margin: 60px 0;
+    padding: 40px;
+    background-color: #fcfbf9; /* Bardzo delikatny, kremowy odcień */
+    border: 1px solid #e0dcd5; /* Subtelna ramka w kolorze kawowym */
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.6s ease; /* Płynna animacja */
+}
+
+.safety-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #d1bfa7; /* Delikatna linia podkreślająca */
+    padding-bottom: 15px;
+}
+
+.safety-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin: 0;
+    color: #5a1827; /* Twój bordowy kolor marki */
+    text-transform: uppercase;
+}
+
+.safety-content p, .safety-content li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #444;
+}
+
+.safety-content ul {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.safety-content li {
+    margin-bottom: 12px;
+    list-style-type: none; /* Usuwamy standardowe kropki */
+    position: relative;
+    padding-left: 20px;
+}
+
+/* Zamiast zwykłych kropek używamy małych rombów w kolorze marki */
+.safety-content li::before {
+    content: "•"; /* To jest znak półpauzy (dłuższy myślnik), wygląda lepiej niż zwykły "-" */
+    color: #5a1827;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
 
     .safety-content li strong {
         color: #333;
@@ -187,16 +308,141 @@
             padding: 20px;
         }
     }
+    .product-color-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.product-color-selector .label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.swatches {
+    display: flex;
+    gap: 10px;
+}
+
+.swatch {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #ccc; /* Delikatna obwódka */
+    transition: transform 0.2s;
+}
+
+.swatch:hover {
+    transform: scale(1.1);
+}
+
+.swatch.active {
+    box-shadow: 0 0 0 2px #5a1827; /* Obwódka dla wybranego produktu */
+}
+.related-products {
+    margin: 60px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    color: #5a1827;
+    margin-bottom: 30px;
+}
+
+.product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    width: 220px;
+    background: #fff;
+    /* Zaokrąglamy cały kafelek */
+    border-radius: 20px; 
+    /* To "przycina" wszystko, co jest w środku (zdjęcie, tło, cień) */
+    overflow: hidden; 
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* To jest klucz: zdjęcie ma zaokrąglone rogi */
+    border-radius: 12px; 
+    /* Dodajemy cień dla zdjęcia, żeby "odkleiło się" od ostrego tła kafelka */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+}
+.image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* To sprawia, że tylko zawartość (zdjęcie) będzie zaokrąglona */
+    padding: 10px; 
+}
+.card-info {
+    padding: 15px;
+}
+
+.card-info h3 {
+    font-size: 1rem;
+    margin: 5px 0;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.swiper-slide:nth-child(2) img {
+    /* Pierwsza wartość to poziom (środek), druga to pion (przesunięcie w górę) */
+    /* 50% 50% to środek, więc zmniejszamy drugą wartość, aby zdjęcie poszło w górę */
+    object-position: 50% 70% !important; 
+}
 </style>
-    <div class="related-products">
-        <h3>Inne kolory:</h3>
-        <div class="related-grid">
-            <a href="bordowa_falbanka-details.html" class="related-item">
-                <img src="bordowafalbanka1.jpg" alt="Bordowa drewniana ramka stojąca z falbanką na zdjęcia Instax Mini">
-                <p>INSTAX MINI BORDOWA FALBANKA</p>
-            </a>
-        </div>
+    <section class="related-products">
+    <h2 class="section-title">Zobacz również</h2>
+    <div class="product-grid">
+        <a href="jodełka-details.html" class="product-card">
+    <img src="jodelka1.jpg" alt="Jodełka">
+    <div class="card-info">
+        <h3>Jodełka</h3>
+        <p>Instax Mini</p>
     </div>
+</a>
+        <a href="bordowa_falbanka-details.html" class="product-card">
+            <img src="bordowafalbanka1.jpg" alt="Bordowa Falbanka">
+            <div class="card-info">
+                <h3>Bordowa Falbanka</h3>
+                <p>Instax Mini</p>
+            </div>
+        </a>
+        <a href="mokka_classy-details.html" class="product-card">
+            <img src="mokka_classy.jpg" alt="Brazowa Falbanka">
+            <div class="card-info">
+                <h3>Mokka Classy</h3>
+                <p>Instax Mini</p>
+            </div>
+        </a>
+    </div>
+</section>
 </main>
     <div id="cart-popup" class="popup-overlay" style="display: none;">
     <div class="popup-content">
@@ -365,6 +611,20 @@ function closeFullImg() {
         window.removeEventListener('keydown', handleLightboxKeyboard);
     }
 }
+let currentIndex = 0;
+
+function moveSlider(direction) {
+    const slider = document.getElementById('productSlider');
+    const slides = document.querySelectorAll('.slide');
+    
+    currentIndex += direction;
+    
+    if (currentIndex < 0) currentIndex = slides.length - 1;
+    if (currentIndex >= slides.length) currentIndex = 0;
+    
+    // Przesunięcie slidera
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
 </script>
     <script src="cart.js"></script>
 
@@ -420,7 +680,6 @@ function closeFullImg() {
 
     <div class="footer-bottom">
         <p>&copy; <span id="current-year"></span> Ustalmy Grawer. Wszelkie prawa zastrzeżone.</p>
-        <p class="author">Realizacja własna.</p>
     </div>
 </footer>
 <!-- Modal do powiększania zdjęć -->
@@ -440,7 +699,7 @@ function closeFullImg() {
         <img id="imgContainer" src="" style="max-width: 100%; max-height: 80vh; object-fit: contain; border: none; display: block; border-radius: 4px; z-index: 99999;" onclick="event.stopPropagation();">
     </div>
     
-    <button class="modal-arrow next" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.6); font-size: 35px; cursor: pointer; padding: 20px; z-index: 100015; transition: color 0.2s;" onclick="event.stopPropagation(); changeModalImg(1);" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">&#10095;</button>
+    <button class="modal-arrow next" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.6); font-size: 35px; cursor: pointer; padding: 20px; z-index: 100015; transition: color 0.2s;" onclick="event.stopPropagation(); changeModalImg(1);" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">&#10095;</button>
 </div>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -450,6 +709,29 @@ function closeFullImg() {
     offset: 0,       // Animacja odpali się dopiero, gdy element będzie 200px w polu widzenia (kluczowe!)
     delay: 100,        // Małe opóźnienie, żeby wyglądało naturalniej
     easing: 'ease-in-out',
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    // Ustawiamy domyślnie 2 slajdy, aby wypełniły ekran po połowie
+    slidesPerView: 2, 
+    spaceBetween: 0,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      // Dla mniejszych ekranów (telefony) wracamy do 1 zdjęcia
+      320: {
+        slidesPerView: 1,
+      },
+      // Dla PC utrzymujemy 2 zdjęcia
+      768: {
+        slidesPerView: 2,
+      }
+    }
   });
 </script>
 </body>

@@ -1,3 +1,4 @@
+console.log("Cart.js został załadowany poprawnie!");
 // 1. INICJALIZACJA KOSZYKA
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentDiscount = 0;
@@ -11,11 +12,37 @@ function updateCart() {
     updateCartBadge();      // <--- TEJ LINII BRAKOWAŁO NA DOLE PLIKU!
 }
 
-// 2. DODAWANIE DO KOSZYKA
-function addToCart(name, price, img) {
+/// 2. DODAWANIE DO KOSZYKA (Jedyna i właściwa wersja)
+
+//  LICZNIK KOSZYKA
+function updateCartBadge() {
+    const badge = document.getElementById('cart-count');
+    if (!badge) return;
+    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+    badge.innerText = totalQty;
+    badge.style.display = totalQty > 0 ? 'flex' : 'none';
+}
+
+// DODAWANIE DO KOSZYKA (Asynchroniczne z blokadą)
+async function addToCart(name, price, img) {
+    try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwHInmuJsg59xAQBu8ci2lpy9eIgT0Q-siLMpLna8HkfWhysAoJZXtBjolKYMiDTQ4jmw/exec');
+        const data = await response.json();
+        
+        let currentFile = window.location.pathname.split('/').pop().replace('-details.html', '');
+        const item = data.find(i => String(i.id).trim().toLowerCase() === String(currentFile).trim().toLowerCase());
+        
+        if (item && parseInt(item.stan) <= 0) {
+            alert("Przepraszamy, ten produkt jest już wyprzedany.");
+            return;
+        }
+    } catch (e) {
+        console.error("Błąd sprawdzania stanu:", e);
+    }
+
     const existing = cart.find(item => item.name === name);
     if (existing) {
-        existing.qty += 1; // Upewnij się, że tu jest .qty a nie .quantity
+        existing.qty += 1;
     } else {
         cart.push({ name: name, price: price, img: img, qty: 1 });
     }
@@ -23,19 +50,33 @@ function addToCart(name, price, img) {
     alert("Dodano " + name + " do koszyka!");
 }
 
-// 3. LICZNIK PRZY IKONIE KOSZYKA
-function updateCartBadge() {
-    const badge = document.getElementById('cart-count');
-    if (!badge) return;
-    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-    
-    if (totalQty > 0) {
-        badge.innerText = totalQty;
-        badge.style.display = 'flex';
-    } else {
-        badge.style.display = 'none';
+//  SYNCHRONIZACJA PRZYCISKU (syncStock)
+async function syncStock() {
+    const btn = document.getElementById('buy-btn');
+    if (!btn) return;
+
+    try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwHInmuJsg59xAQBu8ci2lpy9eIgT0Q-siLMpLna8HkfWhysAoJZXtBjolKYMiDTQ4jmw/exec');
+        const data = await response.json();
+        
+        let currentFile = window.location.pathname.split('/').pop().replace('-details.html', '');
+        const item = data.find(i => String(i.id).trim().toLowerCase() === String(currentFile).trim().toLowerCase());
+        
+        if (item && parseInt(item.stan) <= 0) {
+            btn.innerText = "ZAPYTAJ O DOSTĘPNOŚĆ";
+            btn.onclick = () => window.location.href = 'kontakt.html';
+            btn.style.backgroundColor = "#999";
+        }
+    } catch (e) {
+        console.error("Błąd syncStock:", e);
     }
 }
+
+//  START
+document.addEventListener("DOMContentLoaded", function() {
+    updateCart();
+    syncStock();
+});
 
 // 4. RENDEROWANIE PRODUKTÓW
 function renderCartItems() {
@@ -51,21 +92,29 @@ function renderCartItems() {
             </div>
         `;
 
-        html += cart.map((item, index) => `
+        html += cart.map((item, index) => {
+            // Obliczamy cenę całkowitą dla danej pozycji
+            const lineTotal = (item.price * item.qty).toFixed(2);
+            
+            return `
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom: 15px; border-bottom: 1px solid #f2f2f2;">
                 <img src="${item.img}" width="60" height="60" style="object-fit:cover;">
                 <div style="flex-grow:1; margin-left:20px; text-align: left;">
-                    <p style="margin:0; font-weight:bold; font-size:0.85rem; text-transform:uppercase;">${item.name}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <p style="margin:0; font-weight:bold; font-size:0.85rem; text-transform:uppercase;">${item.name}</p>
+                        <p style="margin:0; font-weight:bold; font-size:0.9rem;">${lineTotal} zł</p>
+                    </div>
                     <div style="display: flex; align-items: center; margin-top: 8px; gap: 10px;">
                         <button onclick="changeQty(${index}, -1)" style="width: 25px; height: 25px; border: 1px solid #ddd; background: white; cursor: pointer;">-</button>
                         <input type="number" value="${item.qty}" min="1" onchange="manualQty(${index}, this.value)" style="width: 45px; text-align: center; border: 1px solid #ddd; font-weight: bold; padding: 2px;">
                         <button onclick="changeQty(${index}, 1)" style="width: 25px; height: 25px; border: 1px solid #ddd; background: white; cursor: pointer;">+</button>
-                        <span style="margin-left: 10px; font-size: 0.85rem; color: #666;">x ${item.price.toFixed(2)} zł</span>
+                        <span style="margin-left: 10px; font-size: 0.75rem; color: #999;">(${item.price.toFixed(2)} zł / szt.)</span>
                     </div>
                 </div>
-                <button onclick="removeItem(${index})" style="background:none; border:none; cursor:pointer; font-size: 1.2rem; color: #ccc;">&times;</button>
+                <button onclick="removeItem(${index})" style="background:none; border:none; cursor:pointer; font-size: 1.2rem; color: #ccc; margin-left: 15px;">&times;</button>
             </div>
-        `).join('');
+            `;
+        }).join('');
         
         list.innerHTML = html;
     }
@@ -378,3 +427,5 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
         }
     });
 });
+
+
